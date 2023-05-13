@@ -1,27 +1,25 @@
 import 'mdbreact/dist/css/mdb.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
-import logo from './logo.svg';
+import "./vendor/bootstrap/css/bootstrap.min.css";
+import "./vendor/animate/animate.css";
+import "./vendor/css-hamburgers/hamburgers.min.css";
+import "./vendor/animsition/css/animsition.min.css";
+import "./css/util.min.css";
+import "./css/main.css";
 import './App.css';
-import {Provider} from "react-redux";
+import {store} from "./store/Store";
+import {Header} from "./components/layout/header";
+import {Footer} from "./components/layout/footer";
+import {Outlet} from "react-router-dom";
+import useScript from "./customHooks/importJSFile";
 
 function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo"/>
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+        <div>
+            <Header></Header>
+            <Outlet/>
+            <Footer></Footer>
         </div>
     );
 }
