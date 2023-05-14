@@ -1,2 +1,2 @@
 export const cateList =
-    [{cateNews: 8}, {cateNews: 2}]
+    [{cate: 8}, {cate: 2}]
