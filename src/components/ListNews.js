@@ -2,13 +2,12 @@ import {cateList} from "./CateList";
 
 export function loadList({params}) {
     console.log(params)
-    return cateList.find(cate => cate.cateNews === params.cateNews);
+    return cateList.find(cate => cate.cate === params.cate);
 }
+
+export const listNews =
+    [{title: 2}, {title: 3}]
 
 export function ListNews() {
-    return [{title: 8}, {title: 2}]
-}
-
-export function listNews({params}) {
-
+    return (<div>ABC123</div>)
 }

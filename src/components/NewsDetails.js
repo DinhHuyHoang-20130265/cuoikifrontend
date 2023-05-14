@@ -6,5 +6,5 @@ export function loadDetails({params}) {
 }
 
 export function NewsDetails() {
-
+    return (<div>ThisIsDetails</div>)
 }

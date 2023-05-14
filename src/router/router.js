@@ -1,19 +1,20 @@
 import {createBrowserRouter} from "react-router-dom";
-import App from "../App";
 import {loadList, ListNews} from "../components/ListNews";
 import {loadDetails, NewsDetails} from "../components/NewsDetails";
+import {Home} from "../components/Home";
+import App from "../App";
 
 export const webRouter = createBrowserRouter([{
     path: '/',
     element: <App/>,
     children: [{
-        path: ":cateNews",
+        path: "home",
+        element: <Home/>,
+    }, {
+        path: ":cate",
         element: <ListNews/>,
-        loader: loadList,
-        children: [{
-            path: ":title",
-            element: <NewsDetails/>,
-            loader: loadDetails
-        }]
+    }, {
+        path: "news/:title",
+        element: <NewsDetails/>
     }]
 }]);
