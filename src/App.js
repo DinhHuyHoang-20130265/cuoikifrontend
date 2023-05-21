@@ -6,6 +6,7 @@ import {store} from "./store/Store";
 import {Header} from "./components/layout/header";
 import {Footer} from "./components/layout/footer";
 import {Outlet} from "react-router-dom";
+import cors from "cors";
 
 function App() {
     return (
