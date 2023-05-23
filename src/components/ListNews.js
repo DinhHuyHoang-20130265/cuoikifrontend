@@ -1,9 +1,7 @@
-import {cateList} from "./CateList";
-import {RssCate, rssCate} from "../rss/rss";
+import {RssCate} from "../rss/rss";
 
 export function loadList({params}) {
     console.log(params)
-    return cateList.find(cate => cate.cate === params.cate);
 }
 
 export const listNews =
