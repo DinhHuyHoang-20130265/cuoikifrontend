@@ -200,45 +200,5 @@ $(document).ready(function () {
         });
     });
 
-    /*==================================================================
-    [ Slide100 txt ]*/
-
-    $('.slide100-txt').each(function () {
-        var slideTxt = $(this);
-        var itemSlideTxt = $(this).find('.slide100-txt-item');
-        var data = [];
-        var count = 0;
-        var animIn = $(this).data('in');
-        var animOut = $(this).data('out');
-
-        for (var i = 0; i < itemSlideTxt.length; i++) {
-            data[i] = $(itemSlideTxt[i]).clone();
-            $(data[i]).addClass('clone');
-        }
-
-        $(window).on('load', function () {
-            $(slideTxt).find('.slide100-txt-item').remove();
-            $(slideTxt).append($(data[0]).clone());
-            $(slideTxt).find('.slide100-txt-item.clone').addClass(animIn + ' visible-true');
-            count = 0;
-        });
-
-        setInterval(function () {
-            $(slideTxt).find('.slide100-txt-item.ab-t-l.' + animOut).remove();
-            $(slideTxt).find('.slide100-txt-item').addClass('ab-t-l ' + animOut);
-
-
-            if (count >= data.length - 1) {
-                count = 0;
-            } else {
-                count++;
-            }
-
-            console.log($(data[count]).text());
-
-            $(slideTxt).append($(data[count]).clone());
-            $(slideTxt).find('.slide100-txt-item.clone').addClass(animIn + ' visible-true');
-        }, 5000);
-    });
 
 })

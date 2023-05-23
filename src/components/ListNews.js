@@ -1,8 +1,5 @@
-import {cateList} from "./CateList";
-
 export function loadList({params}) {
     console.log(params)
-    return cateList.find(cate => cate.cate === params.cate);
 }
 
 export const listNews =
