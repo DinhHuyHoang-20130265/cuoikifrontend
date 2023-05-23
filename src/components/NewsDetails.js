@@ -5,7 +5,6 @@ export function loadDetails({params}) {
     return listNews.find(news => news.title === params.title);
 }
 
-<<<<<<< HEAD
 export const Breadcrumb = () => {
     return (
         <div className="container">
