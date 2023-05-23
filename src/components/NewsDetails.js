@@ -525,8 +525,4 @@ export function NewsDetails() {
         <Breadcrumb></Breadcrumb>
         <Content></Content>
     </div>)
-=======
-export function NewsDetails() {
-    return (<div>ThisIsDetails</div>)
->>>>>>> e88d8ebb5f377bab2ec3aac06123b306bdd5e0ff
 }
