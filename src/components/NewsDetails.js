@@ -5,6 +5,7 @@ export function loadDetails({params}) {
     return listNews.find(news => news.title === params.title);
 }
 
+<<<<<<< HEAD
 export const Breadcrumb = () => {
     return (
         <div className="container">
@@ -525,4 +526,8 @@ export function NewsDetails() {
         <Breadcrumb></Breadcrumb>
         <Content></Content>
     </div>)
+=======
+export function NewsDetails() {
+    return (<div>ThisIsDetails</div>)
+>>>>>>> e88d8ebb5f377bab2ec3aac06123b306bdd5e0ff
 }

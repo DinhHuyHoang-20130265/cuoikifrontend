@@ -43,29 +43,29 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ 1 ]*/
 @font-face {
   font-family: Roboto-Regular;
-  src: url('../fonts/Roboto/Roboto-Regular.ttf');
+  src: url('fontsegular.ttf');
 }
 
 @font-face {
   font-family: Roboto-Medium;
-  src: url('../fonts/Roboto/Roboto-Medium.ttf');
+  src: url('fontsedium.ttf');
 }
 
 @font-face {
   font-family: Roboto-Bold;
-  src: url('../fonts/Roboto/Roboto-Bold.ttf');
+  src: url('fontsold.ttf');
 }
 
 @font-face {
   font-family: Roboto-Black;
-  src: url('../fonts/Roboto/Roboto-Black.ttf');
+  src: url('fontslack.ttf');
 }
 
 /*------------------------------------------------------------------
 [ 2 ]*/
 @font-face {
   font-family: Lato-Regular;
-  src: url('../fonts/Lato/Lato-Regular.ttf');
+  src: url('fontsular.ttf');
 }
 
 
