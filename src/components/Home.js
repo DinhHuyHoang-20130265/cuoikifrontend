@@ -1,5 +1,92 @@
 import {RssCate} from "../rss/rss";
 import {useState} from "react";
+import {Link} from "react-router-dom";
+import {catedatas} from "../cate_data/cate-list";
+import {useDispatch} from "react-redux";
+import banner from "./layout/watermark/banner_nlu.jpg";
+
+const Element = (data) => {
+    const [itemElement, setItem] = useState(data)
+    const list = RssCate(itemElement.cate)
+    if (list.length < 1) {
+        return (<div></div>)
+    }
+    return (
+        <div className="p-b-20">
+            <div className="tab01 p-b-20">
+                <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
+                    <h3 className="f1-m-2 cl12 tab01-title">
+                        {itemElement.name}
+                    </h3>
+                    <Link to={`${itemElement.cate}`} className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                        Xem tất cả tin
+                        <i className="fs-12 m-l-5 fa fa-caret-right"></i>
+                    </Link>
+                </div>
+
+                <div className="tab-content p-t-35">
+                    <div className="tab-pane fade show active" id="tab1-1" role="tabpanel">
+                        <div className="row">
+                            <MainPost title={list[0].title} imageUrl={list[0].imageUrl}
+                                      pubDate={list[0].pubDate}/>
+                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
+                                {list.slice(1, 4).map(item => <ItemPost title={item.title} imageUrl={item.imageUrl}
+                                                                        pubDate={item.pubDate}/>)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const MainPost = (data) => {
+    return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
+        <div className="m-b-30">
+            <Link to={data.link} className="wrap-pic-w hov1 trans-03">
+                <img src={data.imageUrl} alt="IMG"></img>
+            </Link>
+            <div className="p-t-20">
+                <h5 className="p-b-5">
+                    <Link to={data.link}
+                          className="f1-m-3 cl2 hov-cl10 trans-03">
+                        {data.title}
+                    </Link>
+                </h5>
+
+                <span className="cl8">
+                    <span className="f1-s-3">
+                        {data.pubDate.substring(0, data.pubDate.indexOf(" "))}
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>)
+}
+const ItemPost = (data) => {
+    return (<div className="flex-wr-sb-s m-b-30">
+        <Link to={data.link}
+              className="size-w-1 wrap-pic-w hov1 trans-03">
+            <img src={data.imageUrl} alt="IMG"></img>
+        </Link>
+
+        <div className="size-w-2">
+            <h5 className="p-b-5">
+                <Link to={data.link}
+                      className="f1-s-5 cl3 hov-cl10 trans-03">
+                    {data.title}
+                </Link>
+            </h5>
+
+            <span className="cl8">
+                <span className="f1-s-3">
+                   {data.pubDate.substring(0, data.pubDate.indexOf(" "))}
+                </span>
+            </span>
+        </div>
+    </div>)
+}
 
 export const Post = () => {
     return (
@@ -7,333 +94,15 @@ export const Post = () => {
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-10 col-lg-8">
-                        <div className="p-b-20">
-                            {/* Entertainment */}
-                            <div className="tab01 p-b-20">
-                                <div className="tab01-head how2 how2-cl1 bocl12 flex-s-c m-r-10 m-r-0-sr991">
-                                    {/* Brand tab */}
-                                    <h3 className="f1-m-2 cl12 tab01-title">
-                                        Entertainment
-                                    </h3>
-
-                                    {/* Nav tabs */}
-                                    <ul className="nav nav-tabs" role="tablist">
-                                        <li className="nav-item">
-                                            <a className="nav-link active" data-toggle="tab" href="#tab1-1"
-                                               role="tab">All</a>
-                                        </li>
-
-                                        <li className="nav-item">
-                                            <a className="nav-link" data-toggle="tab" href="#tab1-2"
-                                               role="tab">Celebrity</a>
-                                        </li>
-
-                                        <li className="nav-item">
-                                            <a className="nav-link" data-toggle="tab" href="#tab1-3"
-                                               role="tab">Movies</a>
-                                        </li>
-
-
-                                        <li className="nav-item-more dropdown dis-none">
-                                            <a className="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                                                <i className="fa fa-ellipsis-h"></i>
-                                            </a>
-
-                                            <ul className="dropdown-menu">
-                                            </ul>
-                                        </li>
-                                    </ul>
-
-                                    {/*  */}
-                                    <a href="category-01.html" className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
-                                        View all
-                                        <i className="fs-12 m-l-5 fa fa-caret-right"></i>
-                                    </a>
-                                </div>
-
-
-                                {/* Tab panes */}
-                                <div className="tab-content p-t-35">
-                                    {/* - */}
-                                    <div className="tab-pane fade show active" id="tab1-1" role="tabpanel">
-                                        <div className="row">
-                                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                                {/* Item post */}
-                                                <div className="m-b-30">
-                                                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-05.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="p-t-20">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-m-3 cl2 hov-cl10 trans-03">
-                                                                American live music lorem ipsum dolor sit amet
-                                                                consectetur
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-															Music
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 18
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-06.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Music
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 17
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-07.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Game
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 16
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-08.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Celebrity
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 12
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* - */}
-                                    <div className="tab-pane fade" id="tab1-2" role="tabpanel">
-                                        <div className="row">
-                                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                                {/* Item post */}
-                                                <div className="m-b-30">
-                                                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-09.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="p-t-20">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-m-3 cl2 hov-cl10 trans-03">
-                                                                American live music lorem ipsum dolor sit amet
-                                                                consectetur
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-															Music
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 18
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-08.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Celebrity
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 12
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-06.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Music
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 17
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-
-                                                {/* Item post */}
-                                                <div className="flex-wr-sb-s m-b-30">
-                                                    <a href="blog-detail-01.html"
-                                                       className="size-w-1 wrap-pic-w hov1 trans-03">
-                                                        <img src="images/post-07.jpg" alt="IMG"></img>
-                                                    </a>
-
-                                                    <div className="size-w-2">
-                                                        <h5 className="p-b-5">
-                                                            <a href="blog-detail-01.html"
-                                                               className="f1-s-5 cl3 hov-cl10 trans-03">
-                                                                Donec metus orci, malesuada et lectus vitae
-                                                            </a>
-                                                        </h5>
-
-                                                        <span className="cl8">
-														<a href="#" className="f1-s-6 cl8 hov-cl10 trans-03">
-															Game
-														</a>
-
-														<span className="f1-s-3 m-rl-3">
-															-
-														</span>
-
-														<span className="f1-s-3">
-															Feb 16
-														</span>
-													</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            {/* Continue from here */}
-                        </div>
+                        {catedatas.slice(0, 3).map(item => <Element cate={item.cate} name={item.name}/>)}
                     </div>
 
                     <div className="col-md-10 col-lg-4">
                         <div className="p-l-10 p-rl-0-sr991 p-b-20">
-                            {/*  */}
                             <div>
                                 <div className="how2 how2-cl4 flex-s-c">
                                     <h3 className="f1-m-2 cl3 tab01-title">
-                                        Most Popular
+                                        Các bài báo nổi bật nhất
                                     </h3>
                                 </div>
 
@@ -408,7 +177,7 @@ export const Banner = () => {
         <div className="container">
             <div className="flex-c-c">
                 <a href="#">
-                    <img className="max-w-full" src="images/banner-01.jpg" alt="IMG"></img>
+                    <img style={{height: "100px"}} src={banner} alt="IMG"></img>
                 </a>
             </div>
         </div>
