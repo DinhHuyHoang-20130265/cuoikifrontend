@@ -1,7 +1,7 @@
 import {RssCate} from "../rss/rss";
 import {useState} from "react";
 import {Link} from "react-router-dom";
-import {catedatas} from "../cate_data/cate-list";
+import {catedatas} from "../catedatas/cate-list";
 import {useDispatch} from "react-redux";
 import banner from "./layout/watermark/banner_nlu.jpg";
 
@@ -28,10 +28,11 @@ const Element = (data) => {
                     <div className="tab-pane fade show active" id="tab1-1" role="tabpanel">
                         <div className="row">
                             <MainPost title={list[0].title} imageUrl={list[0].imageUrl}
-                                      pubDate={list[0].pubDate}/>
+                                      pubDate={list[0].pubDate} link={list[0].link} cate={itemElement.cate}/>
                             <div className="col-sm-6 p-r-25 p-r-15-sr991">
                                 {list.slice(1, 4).map(item => <ItemPost title={item.title} imageUrl={item.imageUrl}
-                                                                        pubDate={item.pubDate}/>)}
+                                                                        pubDate={item.pubDate} link={item.link}
+                                                                        cate={itemElement.cate}/>)}
                             </div>
                         </div>
                     </div>
@@ -44,13 +45,15 @@ const Element = (data) => {
 const MainPost = (data) => {
     return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
         <div className="m-b-30">
-            <Link to={data.link} className="wrap-pic-w hov1 trans-03">
+            <Link to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                  className="wrap-pic-w hov1 trans-03">
                 <img src={data.imageUrl} alt="IMG"></img>
             </Link>
             <div className="p-t-20">
                 <h5 className="p-b-5">
-                    <Link to={data.link}
-                          className="f1-m-3 cl2 hov-cl10 trans-03">
+                    <Link
+                        to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                        className="f1-m-3 cl2 hov-cl10 trans-03">
                         {data.title}
                     </Link>
                 </h5>
@@ -66,15 +69,16 @@ const MainPost = (data) => {
 }
 const ItemPost = (data) => {
     return (<div className="flex-wr-sb-s m-b-30">
-        <Link to={data.link}
+        <Link to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
               className="size-w-1 wrap-pic-w hov1 trans-03">
             <img src={data.imageUrl} alt="IMG"></img>
         </Link>
 
         <div className="size-w-2">
             <h5 className="p-b-5">
-                <Link to={data.link}
-                      className="f1-s-5 cl3 hov-cl10 trans-03">
+                <Link
+                    to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                    className="f1-s-5 cl3 hov-cl10 trans-03">
                     {data.title}
                 </Link>
             </h5>

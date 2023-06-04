@@ -1,6 +1,6 @@
 import React from "react";
 import watermark from "./watermark/watermark.png";
-import {catedatas} from "../../cate_data/cate-list";
+import {catedatas} from "../../catedatas/cate-list";
 import {CateItem} from "./item-header";
 import {Link} from "react-router-dom";
 

@@ -8,7 +8,8 @@ function Item(data) {
     return (
         <div className="col-3">
             <div>
-                <Link className="wrap-pic-w hov1 trans-03" to={`news/${item.link}`}>
+                <Link className="wrap-pic-w hov1 trans-03"
+                      to={`/${item.cate}/${item.link.substring(item.link.lastIndexOf("/") + 1, item.link.indexOf(".htm"))}`}>
                     <img alt="IMG" src={item.imageUrl}></img>
                 </Link>
 
@@ -19,7 +20,9 @@ function Item(data) {
                         </a>
                     </h5>
                     <span className="cl8">
-                        <Link to={`news/${item.link}`} className="f1-s-6 cl8 hov-cl10 trans-03">{item.name} -
+                        <Link
+                            to={`/${item.cate}/${item.link.substring(item.link.lastIndexOf("/") + 1, item.link.indexOf(".htm"))}`}
+                            className="f1-s-6 cl8 hov-cl10 trans-03">{item.name} -
                         </Link>
                         <span className="f1-s-3 m-rl-3">{item.pubDate}
                         </span>
@@ -41,9 +44,11 @@ export function CateItem(data) {
                 <div className={"tab-content"}>
                     <div className={"tab-pane show active"} id="news-0" role="tabpanel">
                         <div className={"row"}>
-                            {listNews.slice(0, 4).map(item => <Item description={item.description.substring(0, 40).concat("...")}
-                                                                    imageUrl={item.imageUrl} title={item.title} pubDate={item.pubDate.substring(0, item.pubDate.indexOf(" "))}
-                                                                    name={cateitem.name}
+                            {listNews.slice(0, 4).map(item => <Item
+                                description={item.description.substring(0, 40).concat("...")}
+                                imageUrl={item.imageUrl} title={item.title}
+                                pubDate={item.pubDate.substring(0, item.pubDate.indexOf(" "))}
+                                name={cateitem.name} link={item.link} cate={cateitem.cate}
                             />)}
                         </div>
                     </div>
