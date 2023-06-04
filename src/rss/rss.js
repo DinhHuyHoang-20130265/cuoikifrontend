@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {parseString} from 'xml2js';
-
+// doc link rss
 export const RssCate = (cate) => {
     const [feeds, setFeeds] = useState([]);
 
