@@ -1,8 +1,9 @@
+import {RssDetails} from "../rss/rss";
 
-// export function loadDetails({params}) {
-//     console.log(params)
-//     return listNews.find(news => news.title === params.title);
-// }
+export function loadDetails({params}) {
+    RssDetails(params.title)
+    return null;
+}
 
 export const Breadcrumb = () => {
     return (
@@ -22,9 +23,9 @@ export const Breadcrumb = () => {
                 <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
                     <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
                            placeholder="Search"/>
-                        <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                            <i className="zmdi zmdi-search"></i>
-                        </button>
+                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
+                        <i className="zmdi zmdi-search"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -162,15 +163,15 @@ export const Comment = () => {
                 <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name"
                        placeholder="Name*"/>
 
-                    <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                           name="email" placeholder="Email*"/>
+                <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
+                       name="email" placeholder="Email*"/>
 
-                        <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                               name="website" placeholder="Website"/>
+                <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
+                       name="website" placeholder="Website"/>
 
-                            <button className="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-                                Post Comment
-                            </button>
+                <button className="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
+                    Post Comment
+                </button>
             </form>
         </div>
     )

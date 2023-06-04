@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {parseString} from 'xml2js';
+
 // doc link rss
 export const RssCate = (cate) => {
     const [feeds, setFeeds] = useState([]);
@@ -39,7 +40,19 @@ export const RssCate = (cate) => {
     return feeds;
 }
 
-export const RssDetails = (title) => {
+export const RssDetails = (titleUrl) => {
     const [newsDetail, setNewsDetail] = useState(null);
+    const cheerio = require('cheerio');
 
+    useEffect(() => {
+        axios.get(titleUrl).then(response => {
+            const $ = cheerio.load(response.data);
+
+            console.log($('body'))
+        }).catch(error => {
+            console.log(error);
+        });
+    }, [titleUrl]);
+    
+    return newsDetail;
 }

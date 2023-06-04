@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import footer from "./watermark/footer.png";
 import {RssCate} from "../../rss/rss";
 import {Link} from "react-router-dom";
-import {catedatas} from "../../cate_data/cate-list";
+import {catedatas} from "../../catedatas/cate-list";
 
 
 const FooterCateItem = (data) => {

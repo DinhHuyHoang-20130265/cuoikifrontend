@@ -1,6 +1,6 @@
 import {RssCate} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
-import {catedatas} from "../cate_data/cate-list";
+import {catedatas} from "../catedatas/cate-list";
 import {useEffect, useState} from "react";
 
 let cate = "";
