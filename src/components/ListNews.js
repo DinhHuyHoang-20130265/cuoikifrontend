@@ -13,7 +13,7 @@ export const Breadcrumb = (params) => {
                         Trang chủ
                     </Link>
                     <span
-                        className="breadcrumb-item f1-s-3 cl9">{catedatas.find(item => item.cate == params.cate).name}</span>
+                        className="breadcrumb-item f1-s-3 cl9">{catedatas.find(item => item.cate === params.cate).name}</span>
                 </div>
                 <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
                     <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
@@ -39,13 +39,16 @@ export const PageHeading = (params) => {
 export const PostItem = (params) => {
     return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
         <div className="m-b-45">
-            <Link to={params.link} className="wrap-pic-w hov1 trans-03">
+            <Link to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+                  className="wrap-pic-w hov1 trans-03">
                 <img src={params.imageUrl} alt="IMG"/>
             </Link>
 
             <div className="p-t-16">
                 <h5 className="p-b-5">
-                    <Link to={params.link} className="f1-m-3 cl2 hov-cl10 trans-03">
+                    <Link
+                        to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+                        className="f1-m-3 cl2 hov-cl10 trans-03">
                         {params.title}
                     </Link>
                 </h5>
@@ -79,7 +82,7 @@ export const Pagination = (params) => {
     for (var i = 0; i < pageTotal; i++) {
         let page = i + 1;
         menuItems.push(<button onClick={() => onClick(page)}
-                               className={`flex-c-c pagi-item hov-btn1 trans-03 m-all-7 ${params.currentPage == i + 1 ? `pagi-active` : ``}`}>{i + 1}</button>)
+                               className={`flex-c-c pagi-item hov-btn1 trans-03 m-all-7 ${params.currentPage === i + 1 ? `pagi-active` : ``}`}>{i + 1}</button>)
     }
     return (
         <div className="flex-wr-s-c m-rl--7 p-t-15">

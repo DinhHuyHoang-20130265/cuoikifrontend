@@ -1,8 +1,10 @@
 import {RssDetails} from "../rss/rss";
+import {useLoaderData} from "react-router-dom";
+import {useMemo} from "react";
 
 export function loadDetails({params}) {
-    RssDetails(params.title)
-    return null;
+    const link = `/api/` + params.cate + "/" + params.title + ".htm";
+    return {link: link, cate: params.cate, title: params.title};
 }
 
 export const Breadcrumb = () => {
@@ -521,6 +523,10 @@ export const Content = () => {
 }
 
 export function NewsDetails() {
+    const data = useLoaderData();
+    const memoizedUrl = useMemo(() => data.link, []);
+    const post = RssDetails(memoizedUrl);
+    console.log(post);
     return (<div>
         <Breadcrumb></Breadcrumb>
         <Content></Content>
