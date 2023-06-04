@@ -1,27 +1,19 @@
-export function loadList({params}) {
-    console.log(params)
-}
+import {RssCate} from "../rss/rss";
+import {Link, useLoaderData} from "react-router-dom";
+import {catedatas} from "../cate_data/cate-list";
+import {useEffect, useState} from "react";
 
-export const listNews =
-    [{title: 2}, {title: 3}]
-
-
-export const Breadcrumb = () => {
+let cate = "";
+export const Breadcrumb = (params) => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
                 <div className="f2-s-1 p-r-30 m-tb-6">
-                    <a href="index.html" className="breadcrumb-item f1-s-3 cl9">
-                        Home
-                    </a>
-
-                    <a href="category-02.html" className="breadcrumb-item f1-s-3 cl9">
-                        Category
-                    </a>
-
-                    <span className="breadcrumb-item f1-s-3 cl9">
-					Entertaiment
-				</span>
+                    <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
+                        Trang chủ
+                    </Link>
+                    <span
+                        className="breadcrumb-item f1-s-3 cl9">{catedatas.find(item => item.cate == params.cate).name}</span>
                 </div>
                 <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
                     <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
@@ -35,355 +27,89 @@ export const Breadcrumb = () => {
     )
 }
 
-export const PageHeading = () => {
+export const PageHeading = (params) => {
     return (
         <div className="container p-t-4 p-b-40">
             <h2 className="f1-l-1 cl2">
-                Entertaiment
+                {params.name}
             </h2>
         </div>
     )
 }
+export const PostItem = (params) => {
+    return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
+        <div className="m-b-45">
+            <Link to={params.link} className="wrap-pic-w hov1 trans-03">
+                <img src={params.imageUrl} alt="IMG"/>
+            </Link>
 
-export const Feature = () => {
-    return (
-        <section className="bg0">
-            <div className="container">
-                <div className="row m-rl--1">
-                    <div className="col-md-6 p-rl-1 p-b-2">
-                        <div className="bg-img1 size-a-3 how1 pos-relative"
-                             // style="background-image: url(images/entertaiment-01.jpg);"
-                        >
-                            <a href="blog-detail-01.html" className="dis-block how1-child1 trans-03"></a>
+            <div className="p-t-16">
+                <h5 className="p-b-5">
+                    <Link to={params.link} className="f1-m-3 cl2 hov-cl10 trans-03">
+                        {params.title}
+                    </Link>
+                </h5>
 
-                            <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                <a href="#"
-                                   className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                    Celebrity
-                                </a>
-
-                                <h3 className="how1-child2 m-t-14 m-b-10">
-                                    <a href="blog-detail-01.html"
-                                       className="how-txt1 size-a-6 f1-l-1 cl0 hov-cl10 trans-03">
-                                        Music quisque at ipsum vel orci eleifend ultrices
-                                    </a>
-                                </h3>
-
-                                <span className="how1-child2">
-								<span className="f1-s-4 cl11">
-									Jack Sims
-								</span>
-
-								<span className="f1-s-3 cl11 m-rl-3">
-									-
-								</span>
-
-								<span className="f1-s-3 cl11">
-									Feb 16
-								</span>
-							</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-md-6 p-rl-1">
-                        <div className="row m-rl--1">
-                            <div className="col-sm-6 p-rl-1 p-b-2">
-                                <div className="bg-img1 size-a-14 how1 pos-relative"
-                                     // style="background-image: url(images/entertaiment-02.jpg);"
-                                >
-                                    <a href="blog-detail-01.html" className="dis-block how1-child1 trans-03"></a>
-
-                                    <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                        <a href="#"
-                                           className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                            Game
-                                        </a>
-
-                                        <h3 className="how1-child2 m-t-14">
-                                            <a href="blog-detail-01.html"
-                                               className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                                Pellentesque dui nibh, pellen-tesque ut dapibus ut
-                                            </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-sm-6 p-rl-1 p-b-2">
-                                <div className="bg-img1 size-a-14 how1 pos-relative"
-                                     // style="background-image: url(images/entertaiment-03.jpg);"
-                                >
-                                    <a href="blog-detail-01.html" className="dis-block how1-child1 trans-03"></a>
-
-                                    <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                        <a href="#"
-                                           className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                            Music
-                                        </a>
-
-                                        <h3 className="how1-child2 m-t-14">
-                                            <a href="blog-detail-01.html"
-                                               className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                                Motobike Vestibulum vene-natis purus nec nibh volutpat
-                                            </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-sm-6 p-rl-1 p-b-2">
-                                <div className="bg-img1 size-a-14 how1 pos-relative"
-                                     // style="background-image: url(images/entertaiment-04.jpg);"
-                                >
-                                    <a href="blog-detail-01.html" className="dis-block how1-child1 trans-03"></a>
-
-                                    <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                        <a href="#"
-                                           className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                            Game
-                                        </a>
-
-                                        <h3 className="how1-child2 m-t-14">
-                                            <a href="blog-detail-01.html"
-                                               className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                                Pellentesque dui nibh, pellen-tesque ut dapibus ut
-                                            </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-sm-6 p-rl-1 p-b-2">
-                                <div className="bg-img1 size-a-14 how1 pos-relative"
-                                     // style="background-image: url(images/entertaiment-05.jpg);"
-                                >
-                                    <a href="blog-detail-01.html" className="dis-block how1-child1 trans-03"></a>
-
-                                    <div className="flex-col-e-s s-full p-rl-25 p-tb-20">
-                                        <a href="#"
-                                           className="dis-block how1-child2 f1-s-2 cl0 bo-all-1 bocl0 hov-btn1 trans-03 p-rl-5 p-t-2">
-                                            Music
-                                        </a>
-
-                                        <h3 className="how1-child2 m-t-14">
-                                            <a href="blog-detail-01.html"
-                                               className="how-txt1 size-h-1 f1-m-1 cl0 hov-cl10 trans-03">
-                                                Motobike Vestibulum vene-natis purus nec nibh volutpat
-                                            </a>
-                                        </h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <span className="cl8">
+                    <span className="f1-s-3">
+                        {params.pubDate}
+                    </span>
+                </span>
             </div>
-        </section>
-    )
+        </div>
+    </div>)
 }
-
-export const ListPost = () => {
+export const ListPost = (params) => {
     return (
         <div className="row">
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/entertaiment-06.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 18
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/entertaiment-07.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 16
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/entertaiment-08.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 15
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/entertaiment-09.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 13
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/latest-05.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 10
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className="col-sm-6 p-r-25 p-r-15-sr991">
-                <div className="m-b-45">
-                    <a href="blog-detail-01.html" className="wrap-pic-w hov1 trans-03">
-                        <img src="images/latest-06.jpg" alt="IMG"/>
-                    </a>
-
-                    <div className="p-t-16">
-                        <h5 className="p-b-5">
-                            <a href="blog-detail-01.html" className="f1-m-3 cl2 hov-cl10 trans-03">
-                                You wish lorem ipsum dolor sit amet consectetur
-                            </a>
-                        </h5>
-
-                        <span className="cl8">
-										<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-											by John Alvarado
-										</a>
-
-										<span className="f1-s-3 m-rl-3">
-											-
-										</span>
-
-										<span className="f1-s-3">
-											Feb 09
-										</span>
-									</span>
-                    </div>
-                </div>
-            </div>
-
+            {params.list.map(item => <PostItem link={item.link} imageUrl={item.imageUrl} pubDate={item.pubDate}
+                                               title={item.title}/>)}
         </div>
     )
 }
+export const Pagination = (params) => {
+    let menuItems = [];
+    let PostPerPage = 6;
+    let pageTotal = Math.ceil(params.numb / PostPerPage)
 
-export const Pagination = () => {
+    function onClick(page) {
+        params.handlePageClick(page);
+    }
+
+    for (var i = 0; i < pageTotal; i++) {
+        let page = i + 1;
+        menuItems.push(<button onClick={() => onClick(page)}
+                               className={`flex-c-c pagi-item hov-btn1 trans-03 m-all-7 ${params.currentPage == i + 1 ? `pagi-active` : ``}`}>{i + 1}</button>)
+    }
     return (
         <div className="flex-wr-s-c m-rl--7 p-t-15">
-            <a href="#" className="flex-c-c pagi-item hov-btn1 trans-03 m-all-7 pagi-active">1</a>
-            <a href="#" className="flex-c-c pagi-item hov-btn1 trans-03 m-all-7">2</a>
+            {menuItems}
         </div>
     )
 }
 
-export const PostLeft = () => {
+export const PostLeft = (params) => {
+    const [cate, setCate] = useState(params);
+    const [currentPage, setCurrentPage] = useState(1);
+    const list = RssCate(cate.cate);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [params]);
+
+    let indexOfLastPost = currentPage * 6;
+    let indexOfFirstPost = indexOfLastPost - 6;
+    let currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+
+    function handlePageClick(page) {
+        setCurrentPage(page);
+        console.log(currentPosts)
+    };
+
     return (
         <div className="col-md-10 col-lg-8 p-b-80">
-            <ListPost></ListPost>
-            <Pagination></Pagination>
+            <ListPost key={cate.cate} list={currentPosts}></ListPost>
+            <Pagination numb={list.length} currentPage={currentPage} handlePageClick={handlePageClick}></Pagination>
         </div>
     )
 }
@@ -530,24 +256,31 @@ export const Sidebar = () => {
     )
 }
 
-export const Post = () => {
+export const Post = (params) => {
     return (
         <section className="bg0 p-t-70 p-b-55">
             <div className="container">
                 <div className="row justify-content-center">
-                    <PostLeft></PostLeft>
+                    <PostLeft key={cate.cate} cate={params.cate}></PostLeft>
                     <Sidebar></Sidebar>
                 </div>
             </div>
         </section>
     )
 }
+export const handleNextItem = () => {
+    console.log("count");
+};
 
 export function ListNews() {
+    const cate = useLoaderData();
     return (<div>
-        <Breadcrumb></Breadcrumb>
-        <PageHeading></PageHeading>
-        <Feature></Feature>
-        <Post></Post>
+        <Breadcrumb cate={cate.cate}></Breadcrumb>
+        <PageHeading name={cate.name}></PageHeading>
+        <Post key={cate.cate} cate={cate.cate}></Post>
     </div>)
+}
+
+export async function loadList({params}) {
+    return catedatas.find(item => item.cate == params.cate);
 }

@@ -18,7 +18,7 @@ const Element = (data) => {
                     <h3 className="f1-m-2 cl12 tab01-title">
                         {itemElement.name}
                     </h3>
-                    <Link to={`${itemElement.cate}`} className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
+                    <Link to={`/${itemElement.cate}`} className="tab01-link f1-s-1 cl9 hov-cl10 trans-03">
                         Xem tất cả tin
                         <i className="fs-12 m-l-5 fa fa-caret-right"></i>
                     </Link>
