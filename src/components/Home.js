@@ -113,7 +113,7 @@ export const Post = () => {
                                         </div>
 
                                         <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit
+                                            Lorem
                                         </a>
                                     </li>
 
