@@ -2,6 +2,7 @@ import {RssDetails} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
 import {catedatas} from "../catedatas/cate-list";
+import ContentOfPost from "./ContentOfPost";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
@@ -9,7 +10,6 @@ export function loadDetails({params}) {
 }
 
 export const Breadcrumb = (props) => {
-    console.log(props)
     return (<div className="container">
         <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div className="f2-s-1 p-r-30 m-tb-6">
@@ -22,117 +22,6 @@ export const Breadcrumb = (props) => {
                 <span className="breadcrumb-item f1-s-3 cl9">
 					 {props.title}
                 </span>
-            </div>
-        </div>
-    </div>)
-}
-
-export const DetailHeading = () => {
-    return (<div className="p-b-70">
-        <a href="#" className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-            Technology
-        </a>
-
-        <h3 className="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-            Nulla non interdum metus non laoreet nisi tellus eget aliquam lorem pellentesque
-        </h3>
-
-        <div className="flex-wr-s-s p-b-40">
-								<span className="f1-s-3 cl8 m-r-15">
-									<a href="#" className="f1-s-4 cl8 hov-cl10 trans-03">
-										by John Alvarado
-									</a>
-
-									<span className="m-rl-3">-</span>
-
-									<span>
-										Feb 18
-									</span>
-								</span>
-
-            <span className="f1-s-3 cl8 m-r-15">
-									5239 Views
-								</span>
-
-            <a href="#" className="f1-s-3 cl8 hov-cl10 trans-03 m-r-15">
-                0 Comment
-            </a>
-        </div>
-
-        <div className="wrap-pic-max-w p-b-30">
-            <img src="images/blog-list-01.jpg" alt="IMG"/>
-        </div>
-
-        <p className="f1-s-11 cl6 p-b-25">
-            Curabitur volutpat bibendum molestie. Vestibulum ornare gravida semper. Aliquam a dui suscipit,
-            fringilla metus id, maximus leo. Vivamus sapien arcu, mollis eu pharetra vitae, condimentum in orci.
-            Integer eu sodales dolor. Maecenas elementum arcu eu convallis rhoncus. Donec tortor sapien, euismod a
-            faucibus eget, porttitor quis libero.
-        </p>
-
-        <p className="f1-s-11 cl6 p-b-25">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin.
-            Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut
-            malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra
-            pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet
-            imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id
-            vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum
-            feugiat.
-        </p>
-
-        <p className="f1-s-11 cl6 p-b-25">
-            Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet
-            suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque
-            blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus
-            vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id
-            nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
-        </p>
-
-        <div className="flex-s-s p-t-12 p-b-15">
-								<span className="f1-s-12 cl5 m-r-8">
-									Tags:
-								</span>
-
-            <div className="flex-wr-s-s size-w-0">
-                <a href="#" className="f1-s-12 cl8 hov-link1 m-r-15">
-                    Streetstyle
-                </a>
-
-                <a href="#" className="f1-s-12 cl8 hov-link1 m-r-15">
-                    Crafts
-                </a>
-            </div>
-        </div>
-
-        <div className="flex-s-s">
-								<span className="f1-s-12 cl5 p-t-1 m-r-15">
-									Share:
-								</span>
-
-            <div className="flex-wr-s-s size-w-0">
-                <a href="#"
-                   className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                    <i className="fab fa-facebook-f m-r-7"></i>
-                    Facebook
-                </a>
-
-                <a href="#"
-                   className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                    <i className="fab fa-twitter m-r-7"></i>
-                    Twitter
-                </a>
-
-                <a href="#"
-                   className="dis-block f1-s-13 cl0 bg-google borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                    <i className="fab fa-google-plus-g m-r-7"></i>
-                    Google+
-                </a>
-
-                <a href="#"
-                   className="dis-block f1-s-13 cl0 bg-pinterest borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
-                    <i className="fab fa-pinterest-p m-r-7"></i>
-                    Pinterest
-                </a>
             </div>
         </div>
     </div>)
@@ -167,10 +56,10 @@ export const Comment = () => {
     </div>)
 }
 
-export const HeadAndComment = () => {
+export const MainContent = (props) => {
     return (<div className="col-md-10 col-lg-8 p-b-30">
         <div className="p-r-10 p-r-0-sr991">
-            <DetailHeading></DetailHeading>
+            <ContentOfPost post={props.post} cate={props.cate}/>
             <Comment></Comment>
         </div>
     </div>)
@@ -485,11 +374,11 @@ export const Sidebar = () => {
     </div>)
 }
 
-export const Content = () => {
+export const Content = (props) => {
     return (<section className="bg0 p-b-140 p-t-10">
         <div className="container">
             <div className="row justify-content-center">
-                <HeadAndComment></HeadAndComment>
+                <MainContent post={props.post} cate={props.cate}></MainContent>
                 <Sidebar></Sidebar>
             </div>
         </div>
@@ -502,6 +391,6 @@ export function NewsDetails() {
     const post = RssDetails(memoizedUrl);
     return (<div>
         {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
-            <Content key={data} post={post}/></div>) : (<p>Loading</p>)}
+            <Content key={data} post={post} cate={data.cate}/></div>) : (<p>Loading</p>)}
     </div>)
 }
