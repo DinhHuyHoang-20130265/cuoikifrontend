@@ -60,6 +60,6 @@
   },
   "devDependencies": {
     "file-loader": "^6.2.0"
-  },
+  }, 
   "proxy": "http://localhost:3000"
 }
