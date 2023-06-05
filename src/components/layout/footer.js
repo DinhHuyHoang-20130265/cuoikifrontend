@@ -1,5 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
+import footer from "./watermark/footer.png";
+import {RssCate} from "../../rss/rss";
+import {Link} from "react-router-dom";
+import {catedatas} from "../../catedatas/cate-list";
+
+
+const FooterCateItem = (data) => {
+    const [item, setItem] = useState(data)
+    return (
+        <li className="how-bor1 p-rl-5 p-tb-10">
+            <Link to={`${item.cate}`} className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
+                {item.name}
+            </Link>
+        </li>
+    )
+}
+const FooterItem = (data) => {
+    const [item, setItem] = useState(data)
+    return (
+        <li className="flex-wr-sb-s p-b-20">
+            <Link to={`news/${item.link}`} className="size-w-4 wrap-pic-w hov1 trans-03">
+                <img alt="IMG" src={item.imageUrl}></img>
+            </Link>
+            <div className="size-w-5">
+                <h6 className="p-b-5">
+                    <Link to={`news/${item.link}`} className="f1-s-5 cl11 hov-cl10 trans-03">
+                        {item.title}
+                    </Link>
+                </h6>
+                <span className="f1-s-3 cl6"></span>
+            </div>
+        </li>
+    )
+}
+
 export const Footer = () => {
+    const list = RssCate("tin-moi-nhat")
     return (
         <div>
             <footer>
@@ -9,19 +45,19 @@ export const Footer = () => {
                             <div className="col-lg-4 p-b-20">
                                 <div className="size-h-3 flex-s-c">
                                     <a>
-                                        <img className="max-s-full" src="" alt="LOGO"></img>
+                                        <img className="max-s-full" src={footer} alt="LOGO"></img>
                                     </a>
                                 </div>
                                 <div>
                                     <p className="f1-s-1 cl11 p-b-16">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tempor magna
-                                        eget
-                                        elit efficitur, at accumsan sem placerat. Nulla tellus libero, mattis nec
-                                        molestie
-                                        at, facilisis ut turpis. Vestibulum dolor metus, tincidunt eget odio
+                                        Chào mừng bạn đến với trang tin tức NLU!
+                                        Luôn cung cấp cho bạn những thông tin mới nhất
+                                        và chính xác về tất cả các lĩnh vực: chính trị, kinh tế,
+                                        giáo dục, khoa học, công nghệ và nhiều lĩnh vực khác.
                                     </p>
                                     <p className="f1-s-1 cl11 p-b-16">
-                                        Any questions? Call us on (+1) 96 716 6879
+                                        Liên hệ với chúng tôi qua email: <a
+                                        href={"mailto: 20130265@st.hcmuaf.edu.vn"}>20130265@st.hcmuaf.edu.vn</a>
                                     </p>
                                     <div className="p-t-15">
                                         <a href="#" className="fs-18 cl11 hov-cl10 trans-03 m-r-8">
@@ -46,62 +82,27 @@ export const Footer = () => {
                             <div className="col-sm-6 col-lg-4 p-b-20">
                                 <div className="size-h-3 flex-s-c">
                                     <h5 className="f1-m-7 cl0">
-                                        Popular Posts
+                                        Tin mới nhất
                                     </h5>
                                 </div>
                                 <ul>
-                                    <li className="flex-wr-sb-s p-b-20">
-                                        <a href="#" className="size-w-4 wrap-pic-w hov1 trans-03">
-                                            <img alt="IMG"></img>
-                                        </a>
-                                        <div className="size-w-5">
-                                            <h6 className="p-b-5">
-                                                <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03">
-                                                    Donec metus orci, malesuada et lectus vitae
-                                                </a>
-                                            </h6>
-                                            <span className="f1-s-3 cl6">Feb 17</span>
-                                        </div>
-                                    </li>
+                                    {
+                                        list.slice(0, 3).map(item => <FooterItem title={item.title}
+                                                                                 imageUrl={item.imageUrl}
+                                                                                 pubDate={item.pubDate}
+                                                                                 link={item.link}/>)}
                                 </ul>
                             </div>
                             <div className="col-sm-6 col-lg-4 p-b-20">
                                 <div className="size-h-3 flex-s-c">
                                     <h5 className="f1-m-7 cl0">
-                                        Category
+                                        Các danh mục
                                     </h5>
                                 </div>
 
                                 <ul className="m-t--12">
-                                    <li className="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                            Fashion (22)
-                                        </a>
-                                    </li>
-
-                                    <li className="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                            Technology (29)
-                                        </a>
-                                    </li>
-
-                                    <li className="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                            Street Style (15)
-                                        </a>
-                                    </li>
-
-                                    <li className="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                            Life Style (28)
-                                        </a>
-                                    </li>
-
-                                    <li className="how-bor1 p-rl-5 p-tb-10">
-                                        <a href="#" className="f1-s-5 cl11 hov-cl10 trans-03 p-tb-8">
-                                            DIY & Crafts (16)
-                                        </a>
-                                    </li>
+                                    {catedatas.slice(0, 4).map(item => <FooterCateItem cate={item.cate}
+                                                                                       name={item.name}/>)}
                                 </ul>
                             </div>
                         </div>

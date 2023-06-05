@@ -7,14 +7,20 @@ import App from "../App";
 export const webRouter = createBrowserRouter([{
     path: '/',
     element: <App/>,
-    children: [{
-        path: "home",
-        element: <Home/>,
-    }, {
-        path: ":cate",
-        element: <ListNews/>,
-    }, {
-        path: "news/:title",
-        element: <NewsDetails/>
-    }]
+    children: [
+        {
+            path: "",
+            element: <Home/>
+        }, {
+            path: "home",
+            element: <Home/>,
+        }, {
+            path: ":cate",
+            element: <ListNews/>,
+            loader: loadList
+        }, {
+            path: ":cate/:title",
+            element: <NewsDetails/>,
+            loader: loadDetails
+        }]
 }]);

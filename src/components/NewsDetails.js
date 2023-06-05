@@ -2,6 +2,8 @@ import {RssDetails} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
 import {catedatas} from "../catedatas/cate-list";
+import {useLoaderData} from "react-router-dom";
+import {useMemo} from "react";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
@@ -154,7 +156,6 @@ export const Comment = () => {
 
             <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name"
                    placeholder="Name*"/>
-
             <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
                    name="email" placeholder="Email*"/>
 
@@ -501,6 +502,7 @@ export function NewsDetails() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
     const post = RssDetails(memoizedUrl);
+    console.log(post);
     return (<div>
         {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
             <Content key={data} post={post}/></div>) : (<p>Loading</p>)}
