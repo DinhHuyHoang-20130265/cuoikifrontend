@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import {parseString} from 'xml2js';
+import cheerio from "cheerio";
 
 // doc link rss
 export const RssCate = (cate) => {
@@ -40,29 +41,28 @@ export const RssCate = (cate) => {
     return feeds;
 }
 
-export const RssDetails = (titleUrl) => {
+export const RssDetails = async (titleUrl) => {
     const [newsDetail, setNewsDetail] = useState(null);
     const cheerio = require('cheerio');
 
     useEffect(() => {
+        async function getPost() {
+            await axios.get(titleUrl).then(response => {
+                const $ = cheerio.load(response.data);
+                const title = $("h1.title-content").text();
+                const date = $("p.dateandcat.clearfix").text();
+                const sapo = $("h2.sapo-detail").text();
+                const contents = $("div[itemprop=articleBody]").contents()
+                const range = document.createRange();
+                const entryBodyFragment = range.createContextualFragment(contents);
+                const result = {title: title, date: date, sapo: sapo, contents: entryBodyFragment}
+                setNewsDetail(result)
+            }).catch(error => {
+                console.log(error);
+            });
+        }
 
-        axios.get(titleUrl).then(response => {
-            const $ = cheerio.load(response.data);
-            const title = $("h1.title-content").text();
-            const date = $("p.dateandcat.clearfix").text();
-            const sapo = $("h2.sapo-detail").text();
-            const contents = $("div[itemprop=articleBody]").contents()
-            const range = document.createRange();
-            const entryBodyFragment = range.createContextualFragment(contents);
-
-            console.log(title);
-            console.log(date);
-            console.log(sapo);
-            console.log(entryBodyFragment);
-        }).catch(error => {
-            console.log(error);
-        });
-    }, [titleUrl]);
-
+        getPost();
+    }, [titleUrl, cheerio]);
     return newsDetail;
 }
