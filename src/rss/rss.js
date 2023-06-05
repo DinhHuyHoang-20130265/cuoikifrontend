@@ -41,7 +41,7 @@ export const RssCate = (cate) => {
     return feeds;
 }
 
-export const RssDetails = async (titleUrl) => {
+export const RssDetails = (titleUrl) => {
     const [newsDetail, setNewsDetail] = useState(null);
     const cheerio = require('cheerio');
 
