@@ -1,8 +1,17 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
+import loudspeaker from "../img/loudspeaker.png";
+import Pause from "../img/Pause.png";
+import {useSpeechSynthesis} from "react-speech-kit";
 
 function ContentOfPost(props) {
+    const [ended, setEnded] = useState(false);
+    const onEnd = () => setEnded(true);
+    const [speakContent, setSpeak] = useState("");
+    const {cancel, speak, speaking, voices, pause, resume} = useSpeechSynthesis({
+        onEnd
+    });
     const content = props.post;
     const contentRef = useRef(null);
     const datacontent = content.contents
@@ -13,28 +22,41 @@ function ContentOfPost(props) {
                 contentElement.removeChild(contentElement.firstChild);
             }
             contentRef.current.appendChild(datacontent)
+            const paragraphs = contentElement.querySelectorAll('p');
+            let speakData = content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
+            setSpeak(speakData)
         }
     }, [datacontent]);
+
+    function toggle() {
+        if (speaking) {
+            cancel()
+        } else {
+            speak({text: speakContent, voice: voices[303]})
+        }
+    }
+
     return (<div className="p-b-70">
         <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
             {catedatas.find(item => item.cate === props.cate).name}
         </Link>
-
-        <h3 className="f1-l-3 cl2 p-b-16 p-t-33 respon2">
+        <h3 className="f1-l-3 cl2 p-b-20 p-t-33 respon2">
             {content.title}
         </h3>
-
-        <div className="flex-wr-s-s p-b-40">
+        <div className="flex-wr-s-s p-b-17" style={{alignItems: "center"}}>
 								<span className="f1-s-3 cl8 m-r-15">
 									<span>
 										{content.date}
 									</span>
 								</span>
+            <img height={"30px"} width={"30px"} src={!speaking ? loudspeaker : Pause} alt={"Click here to listen"}
+                 style={{cursor: "pointer", marginLeft: "10px"}}
+                 onClick={toggle}/>
+
         </div>
-        <h4 className={"sapo"}>{content.sapo}</h4>
+        <h5 className={"sapo p-b-15"}>{content.sapo}</h5>
 
-        <div ref={contentRef}/>
-
+        <div className={"main-content"} ref={contentRef}/>
         <div className="flex-s-s p-t-12 p-b-15">
 								<span className="f1-s-12 cl5 m-r-8">
 									Tags:
