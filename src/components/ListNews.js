@@ -34,7 +34,7 @@ export const PageHeading = (params) => {
 export const PostItem = (params) => {
     return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
         <div className="m-b-45">
-            <Link to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+            <Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
                   className="wrap-pic-w hov1 trans-03">
                 <img src={params.imageUrl} alt="IMG"/>
             </Link>
@@ -42,7 +42,7 @@ export const PostItem = (params) => {
             <div className="p-t-16">
                 <h5 className="p-b-5">
                     <Link
-                        to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+                        to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
                         className="f1-m-3 cl2 hov-cl10 trans-03">
                         {params.title}
                     </Link>
@@ -138,6 +138,9 @@ export const PostLeft = (params) => {
                 <Pagination numb={filtered.length > 6 ? filtered.length : currentList.length} currentPage={currentPage}
                             handlePageClick={handlePageClick}></Pagination>
             )}
+            {currentList &&
+                <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị danh
+                    sách theo danh mục tương ứng... </h4>}
         </div>
     )
 }
