@@ -9,21 +9,21 @@ function Item(data) {
         <div className="col-3">
             <div>
                 <Link className="wrap-pic-w hov1 trans-03"
-                      to={`/${item.cate}/${item.link.substring(item.link.lastIndexOf("/") + 1, item.link.indexOf(".htm"))}`}>
+                      to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}>
                     <img alt="IMG" src={item.imageUrl}></img>
                 </Link>
 
                 <div className="p-t-10">
                     <h5 className="p-b-5">
-                        <a className="f1-s-5 cl3 hov-cl10 trans-03">
+                        <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                              className="f1-s-5 cl3 hov-cl10 trans-03">
                             {item.title}
-                        </a>
+                        </Link>
                     </h5>
                     <span className="cl8">
-                        <Link
-                            to={`/${item.cate}/${item.link.substring(item.link.lastIndexOf("/") + 1, item.link.indexOf(".htm"))}`}
+                        <a
                             className="f1-s-6 cl8 hov-cl10 trans-03">{item.name} -
-                        </Link>
+                        </a>
                         <span className="f1-s-3 m-rl-3">{item.pubDate}
                         </span>
                     </span>

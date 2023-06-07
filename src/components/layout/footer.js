@@ -19,14 +19,14 @@ const FooterItem = (data) => {
     const [item, setItem] = useState(data)
     return (
         <li className="flex-wr-sb-s p-b-20">
-            <Link to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+            <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                   className="size-w-4 wrap-pic-w hov1 trans-03">
                 <img alt="IMG" src={item.imageUrl}></img>
             </Link>
             <div className="size-w-5">
                 <h6 className="p-b-5">
                     <Link
-                        to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                        to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                         className="f1-s-5 cl11 hov-cl10 trans-03">
                         {item.title}
                     </Link>
