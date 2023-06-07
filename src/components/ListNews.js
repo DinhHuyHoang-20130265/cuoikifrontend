@@ -85,9 +85,9 @@ export const Pagination = (params) => {
         </div>
     )
 }
-
 export const PostLeft = (params) => {
     const [cate, setCate] = useState(params);
+    const [selectedOption, setSelectedOption] = useState("1");
     const [currentPage, setCurrentPage] = useState(1);
     const [currentList, setCurrentList] = useState(null);
     const [searchKey, setSearch] = useState("");
@@ -101,14 +101,16 @@ export const PostLeft = (params) => {
 
     useEffect(() => {
         if (list) {
-            let filteredList = list.filter(item => item.title.toUpperCase().indexOf(searchKey.toUpperCase()) !== -1);
+            let filteredList = list.filter(item => item.title.toUpperCase().indexOf(searchKey.toUpperCase()) !== -1).sort((a, b) => {
+                return (selectedOption === "2") ? new Date(a.pubDate) - new Date(b.pubDate) : new Date(b.pubDate) - new Date(a.pubDate)
+            });
             setFilteredList(filteredList)
             let indexOfLastPost = currentPage * 6;
             let indexOfFirstPost = indexOfLastPost - 6;
             let currentPosts = filteredList.slice(indexOfFirstPost, indexOfLastPost);
             setCurrentList(currentPosts);
         }
-    }, [list, currentPage, searchKey]);
+    }, [list, currentPage, searchKey, selectedOption]);
 
 
     function handlePageClick(page) {
@@ -124,21 +126,32 @@ export const PostLeft = (params) => {
 
     }
 
+    const changeOrder = (event) => {
+        setSelectedOption(event.target.value);
+    };
+
     return (
         <div className="col-md-10 col-lg-8 p-b-80">
-            <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
-                <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
-                       placeholder="Tìm bài báo..." onChange={e => search(e.target.value)}/>
-                <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03" onClick={toSearchSite}>
-                    <i className="zmdi zmdi-search"></i>
-                </button>
+            <div className={"d-flex"}>
+                <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
+                    <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
+                           placeholder="Tìm bài báo..." onChange={e => search(e.target.value)}/>
+                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03" onClick={toSearchSite}>
+                        <i className="zmdi zmdi-search"></i>
+                    </button>
+                </div>
+                <select className={"select size-a-2 bo-1-rad-5 of-hidden bocl11 m-tb-6 m-b-30"}
+                        style={{marginLeft: "55%",}} onChange={changeOrder}>
+                    <option value="1" selected={true}>Mới nhất</option>
+                    <option value="2">Cũ nhất</option>
+                </select>
             </div>
             {currentList && <ListPost key={cate.cate} list={currentList}></ListPost>}
             {currentList && (
                 <Pagination numb={filtered.length > 6 ? filtered.length : currentList.length} currentPage={currentPage}
                             handlePageClick={handlePageClick}></Pagination>
             )}
-            {currentList &&
+            {!currentList &&
                 <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị danh
                     sách theo danh mục tương ứng... </h4>}
         </div>
