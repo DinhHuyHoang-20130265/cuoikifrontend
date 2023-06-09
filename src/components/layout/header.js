@@ -3,6 +3,7 @@ import watermark from "./watermark/watermark.png";
 import {catedatas} from "../../catedatas/cate-list";
 import {CateItem} from "./item-header";
 import {Link} from "react-router-dom";
+import Weather from "./weather";
 
 const ItemOther = (data) => {
     return (
@@ -17,6 +18,7 @@ export const Header = () => {
                 <div className="topbar">
                     <div className="content-topbar container h-100">
                         <div className="left-topbar">
+                            <Weather/>
                             <a href={"#"} className="left-topbar-item">
                                 Giới thiệu
                             </a>
@@ -59,6 +61,7 @@ export const Header = () => {
                 <div className="menu-mobile">
                     <ul className="topbar-mobile">
                         <li className="left-topbar">
+                            <Weather/>
                             <a href="#" className="left-topbar-item">
                                 Giới thiệu
                             </a>

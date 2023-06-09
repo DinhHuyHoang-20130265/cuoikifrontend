@@ -1,12 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
-import loudspeaker from "../img/loudspeaker.png";
 import Speech from "./Speech/Speech";
 
 function ContentOfPost(props) {
     const [speakContent, setSpeak] = useState("");
     const content = props.post;
+
+
     const contentRef = useRef(null);
     const datacontent = content.contents
     useEffect(() => {
@@ -21,7 +22,6 @@ function ContentOfPost(props) {
             setSpeak(speakData)
         }
     }, [datacontent]);
-
 
     return (<div className="p-b-70">
         <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">

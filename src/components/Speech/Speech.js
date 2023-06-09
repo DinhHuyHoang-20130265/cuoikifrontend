@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import "./style.css";
 
-const Speech = ({text}) => {
+const Speech = (data) => {
     const [isPaused, setIsPaused] = useState(false);
     const [speech, setSpeech] = useState(null);
     const [pitch, setPitch] = useState(1);
@@ -12,12 +12,12 @@ const Speech = ({text}) => {
     const voices = synth.getVoices();
 
     useEffect(() => {
-        const u = new SpeechSynthesisUtterance(text);
+        const u = new SpeechSynthesisUtterance(data.text);
         setSpeech(u);
         return () => {
             synth.cancel();
         };
-    }, [text, synth]);
+    }, [data, synth]);
     const handlePlay = () => {
         if (isPaused)
             synth.resume();
