@@ -1,18 +1,13 @@
 import React, {useEffect, useRef, useState} from "react";
 import {Link} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
-import loudspeaker from "../img/loudspeaker.png";
-import Pause from "../img/Pause.png";
-import {useSpeechSynthesis} from "react-speech-kit";
+import Speech from "./Speech/Speech";
 
 function ContentOfPost(props) {
-    const [ended, setEnded] = useState(false);
-    const onEnd = () => setEnded(true);
     const [speakContent, setSpeak] = useState("");
-    const {cancel, speak, speaking, voices, pause, resume} = useSpeechSynthesis({
-        onEnd
-    });
     const content = props.post;
+
+
     const contentRef = useRef(null);
     const datacontent = content.contents
     useEffect(() => {
@@ -28,14 +23,6 @@ function ContentOfPost(props) {
         }
     }, [datacontent]);
 
-    function toggle() {
-        if (speaking) {
-            cancel()
-        } else {
-            speak({text: speakContent, voice: voices[303]})
-        }
-    }
-
     return (<div className="p-b-70">
         <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
             {catedatas.find(item => item.cate === props.cate).name}
@@ -49,19 +36,16 @@ function ContentOfPost(props) {
 										{content.date}
 									</span>
 								</span>
-            <img height={"30px"} width={"30px"} src={!speaking ? loudspeaker : Pause} alt={"Click here to listen"}
-                 style={{cursor: "pointer", marginLeft: "10px"}}
-                 onClick={toggle}/>
-
+            <Speech text={speakContent}/>
         </div>
         <h5 className={"sapo p-b-15"}>{content.sapo}</h5>
 
         <div className={"main-content"} ref={contentRef}/>
+
         <div className="flex-s-s p-t-12 p-b-15">
 								<span className="f1-s-12 cl5 m-r-8">
 									Tags:
 								</span>
-
             <div className="flex-wr-s-s size-w-0">
                 <a href="#" className="f1-s-12 cl8 hov-link1 m-r-15">
                     Streetstyle
