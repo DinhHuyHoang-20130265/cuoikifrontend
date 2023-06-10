@@ -1,9 +1,8 @@
 import {RssDetails} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
-import {useMemo} from "react";
+import {useMemo, useState} from "react";
 import {catedatas} from "../catedatas/cate-list";
 import ContentOfPost from "./ContentOfPost";
-import {MDBBreadcrumb, MDBBreadcrumbItem} from 'mdb-react-ui-kit';
 import {Comments, FacebookProvider} from "react-facebook";
 
 export function loadDetails({params}) {
@@ -12,28 +11,18 @@ export function loadDetails({params}) {
 }
 
 export const Breadcrumb = (props) => {
-    return (<div className="container">
+    return (<div className="container" style={{display:"flex"}}>
         <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-            <div className="f2-s-1 p-r-30 m-tb-6">
-                <>
-                    <MDBBreadcrumb>
-                        <MDBBreadcrumbItem>
+            <div className="f2-s-1 p-r-30 m-tb-6" style={{display:"flex"}}>
                             <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
                                 Trang chủ
                             </Link>
-                        </MDBBreadcrumbItem>
-                        <MDBBreadcrumbItem>
                             <Link to={`/${props.cate}`} className="breadcrumb-item f1-s-3 cl9">
                                 {catedatas.find(item => item.cate === props.cate).name}
                             </Link>
-                        </MDBBreadcrumbItem>
-                        <MDBBreadcrumbItem active>
                             <span className="breadcrumb-item f1-s-3 cl9">
 					            {props.title}
                             </span>
-                        </MDBBreadcrumbItem>
-                    </MDBBreadcrumb>
-                </>
             </div>
         </div>
     </div>)
@@ -375,7 +364,6 @@ export const Content = (props) => {
         </div>
     </section>)
 }
-
 export function NewsDetails() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
