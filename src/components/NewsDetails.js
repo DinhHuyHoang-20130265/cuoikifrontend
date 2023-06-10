@@ -398,8 +398,6 @@ const saveRecentlyViewedNews = (news) => {
             newsList.unshift(news);
         } else newsList.unshift(news); // Xóa tin tức đã tồn tại để đưa lên đầu danh sách
 
-        console.log(newsList)
-
         sessionStorage.setItem('recentlyViewedNews', JSON.stringify(newsList));
     }
 };
