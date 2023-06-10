@@ -10,7 +10,7 @@ function Item(data) {
             <div>
                 <Link className="wrap-pic-w hov1 trans-03"
                       to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}>
-                    <img alt="IMG" src={item.imageUrl}></img>
+                    <img alt="IMG" src={item.imageUrl} title={item.description}></img>
                 </Link>
 
                 <div className="p-t-10">
@@ -45,14 +45,13 @@ export function CateItem(data) {
                     <div className={"tab-pane show active"} id="news-0" role="tabpanel">
                         <div className={"row"}>
                             {listNews.slice(0, 4).map(item => <Item
-                                description={item.description.substring(0, 40).concat("...")}
+                                description={item.description}
                                 imageUrl={item.imageUrl} title={item.title}
                                 pubDate={item.pubDate.substring(0, item.pubDate.indexOf(" "))}
                                 name={cateitem.name} link={item.link} cate={cateitem.cate}
                             />)}
                         </div>
                     </div>
-
                 </div>
             </div>
         </li>

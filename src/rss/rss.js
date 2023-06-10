@@ -20,7 +20,7 @@ export const RssCate = (cate) => {
                         const imageUrlRegex = /<img.*?src="(.*?)"/;
                         const imageUrlMatch = description.match(imageUrlRegex);
                         const imageUrl = imageUrlMatch ? imageUrlMatch[1] : null;
-                        const cleanedDescription = description.replace(/<\/?(a|img)[^>]*>/g, '');
+                        const cleanedDescription = description.replace(/<\/?(a|img)[^>]*>/g, '').replace(/&#\d+;/g, '');
                         return {
                             title: item.title[0],
                             link: item.link[0],

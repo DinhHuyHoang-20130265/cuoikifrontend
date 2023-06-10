@@ -11,8 +11,8 @@ export const Breadcrumb = () => {
                     <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
                         Trang chủ
                     </Link>
-                    <span
-                        className="breadcrumb-item f1-s-3 cl9">Lịch sử</span>
+                    <Link to={"/history"}
+                          className="breadcrumb-item f1-s-3 cl9">Lịch sử</Link>
                 </div>
                 <div className="pos-relative size-a-2 of-hidden bocl11 m-tb-6">
                 </div>

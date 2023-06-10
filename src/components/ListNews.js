@@ -2,6 +2,7 @@ import {RssCate} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
 import {useEffect, useState} from "react";
+import Error404 from "./Error404";
 
 let cate = "";
 export const Breadcrumb = (params) => {
@@ -315,13 +316,16 @@ export const Post = (params) => {
 
 export function ListNews() {
     const cate = useLoaderData();
-    return (<div>
+    console.log(typeof cate)
+    return (cate ? <div>
         <Breadcrumb cate={cate.cate}></Breadcrumb>
         <PageHeading name={cate.name}></PageHeading>
         <Post key={cate.cate} cate={cate.cate}></Post>
-    </div>)
+    </div> : <Error404/>)
 }
 
 export async function loadList({params}) {
-    return catedatas.find(item => item.cate === params.cate);
+    const cate = catedatas.find(item => item.cate === params.cate);
+    console.log(cate)
+    return (typeof cate === 'undefined' ? null : cate);
 }

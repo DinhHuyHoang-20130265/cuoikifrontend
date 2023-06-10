@@ -8,6 +8,7 @@ import banner from "./layout/watermark/banner_nlu.jpg";
 const Element = (data) => {
     const [itemElement, setItem] = useState(data)
     const list = RssCate(itemElement.cate)
+    console.log(list)
     if (list.length < 1) {
         return (<div>Nothing</div>)
     }
@@ -28,11 +29,13 @@ const Element = (data) => {
                     <div className="tab-pane fade show active" id="tab1-1" role="tabpanel">
                         <div className="row">
                             <MainPost title={list[0].title} imageUrl={list[0].imageUrl}
+                                      description={list[0].description}
                                       pubDate={list[0].pubDate} link={list[0].link} cate={itemElement.cate}/>
                             <div className="col-sm-6 p-r-25 p-r-15-sr991">
                                 {list.slice(1, 4).map(item => <ItemPost title={item.title} imageUrl={item.imageUrl}
                                                                         pubDate={item.pubDate} link={item.link}
-                                                                        cate={itemElement.cate}/>)}
+                                                                        cate={itemElement.cate}
+                                                                        description={item.description}/>)}
                             </div>
                         </div>
                     </div>
@@ -47,7 +50,7 @@ const MainPost = (data) => {
         <div className="m-b-30">
             <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                   className="wrap-pic-w hov1 trans-03">
-                <img src={data.imageUrl} alt="IMG"></img>
+                <img src={data.imageUrl} alt={"IMG"} title={data.description}></img>
             </Link>
             <div className="p-t-20">
                 <h5 className="p-b-5">
@@ -71,7 +74,7 @@ const ItemPost = (data) => {
     return (<div className="flex-wr-sb-s m-b-30">
         <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
               className="size-w-1 wrap-pic-w hov1 trans-03">
-            <img src={data.imageUrl} alt="IMG"></img>
+            <img src={data.imageUrl} alt="IMG" title={data.description}></img>
         </Link>
 
         <div className="size-w-2">
@@ -162,12 +165,8 @@ export const Post = () => {
                                     </li>
                                 </ul>
                             </div>
-
-                            {/*  */}
                             <div className="flex-c-s p-t-8">
-                                <a href="#">
-                                    <img className="max-w-full" src="images/banner-02.jpg" alt="IMG"></img>
-                                </a>
+
                             </div>
                         </div>
                     </div>
@@ -391,15 +390,12 @@ export const Latest = () => {
 
                     <div className="col-md-10 col-lg-4">
                         <div className="p-l-10 p-rl-0-sr991 p-b-20">
-                            {/* Video */}
                             <div className="p-b-55">
                                 <div className="how2 how2-cl4 flex-s-c m-b-35">
                                     <h3 className="f1-m-2 cl3 tab01-title">
                                         Subcrise
                                     </h3>
                                 </div>
-
-                                {/* Subscribe */}
                                 <div className="bg10 p-rl-35 p-t-28 p-b-35 m-b-55">
                                     <h5 className="f1-m-5 cl0 p-b-10">
                                         Subscribe
@@ -418,8 +414,6 @@ export const Latest = () => {
                                         </button>
                                     </form>
                                 </div>
-
-                                {/* Tag */}
                                 <div className="p-b-55">
                                     <div className="how2 how2-cl4 flex-s-c m-b-30">
                                         <h3 className="f1-m-2 cl3 tab01-title">

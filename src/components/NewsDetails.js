@@ -3,6 +3,7 @@ import {Link, useLoaderData} from "react-router-dom";
 import {useEffect, useMemo, useState} from "react";
 import {catedatas} from "../catedatas/cate-list";
 import ContentOfPost from "./ContentOfPost";
+import Error404 from "./Error404";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
@@ -13,11 +14,13 @@ export function loadDetails({params}) {
 export const Breadcrumb = (props) => {
     const [isSaved, setIsSaved] = useState(false);
     const saved = localStorage.getItem('savedNews');
-    let newsList = saved ? JSON.parse(saved) : [];
+    const newsList = saved ? JSON.parse(saved) : [];
     useEffect(() => {
-        if (props.item)
+        if (props.item) {
             setIsSaved(newsList.findIndex(item => item.link === props.item.link) !== -1)
-    }, [isSaved])
+        }
+    }, [isSaved, props])
+
     const savedNews = (news) => {
         if (news != null) {
             const existingNewsIndex = newsList.findIndex(item => item.link === news.link)
@@ -51,8 +54,9 @@ export const Breadcrumb = (props) => {
                 </span>
             </div>
         </div>
-        <a href={"#"} onClick={() => savedNews(props.item)}><i className={"fa fa-bookmark"}
-                                                               style={{color: (isSaved ? "yellow" : "blue")}}></i></a>
+        <a href={"#"} onClick={() => savedNews(props.item)}>
+            <i className={"fa fa-bookmark"}
+               style={{color: (isSaved ? "yellow" : "blue")}}></i></a>
     </div>)
 }
 
@@ -445,8 +449,7 @@ export function NewsDetails() {
     return (<div key={data.link}>
         {post ? (<div><Breadcrumb item={item} key={data} cate={data.cate} title={post.title}/>
             <Content key={post} post={post} cate={data.cate}/></div>) : (
-            <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
-                tiết... </h4>)}
+            <Error404/>)}
     </div>)
 }
 

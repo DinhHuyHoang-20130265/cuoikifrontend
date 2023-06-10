@@ -6,6 +6,7 @@ import App from "../App";
 import {Viewed} from "../components/Viewed";
 import {SavedPost} from "../components/SavedPost";
 
+
 export const webRouter = createBrowserRouter([{
     path: '/',
     element: <App/>,
