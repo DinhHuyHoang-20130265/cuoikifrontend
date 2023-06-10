@@ -62,7 +62,7 @@ function ContentOfPost(props) {
             <div className="flex-wr-s-s size-w-0">
                 <ShareFbButton/>
 
-
+                <ShareTwitterButton/>
             </div>
         </div>
     </div>)
@@ -84,7 +84,21 @@ function ShareFbButton() {
     );
 }
 
+function ShareTwitterButton() {
+    const ShareTwitterButton = () => {
+        const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link"); // URL của tin tức muốn chia sẻ
+        const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
+        window.open(twitterShareUrl, '_blank');
+    };
 
+    return (
+        <a onClick={ShareTwitterButton}
+           className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+            <i className="fab fa-twitter m-r-7"></i>
+            Twitter
+        </a>
+    );
+}
 
 
 export default ContentOfPost
