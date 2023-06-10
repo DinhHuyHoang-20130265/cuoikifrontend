@@ -1,6 +1,6 @@
-import {RssDetails} from "../rss/rss";
+import {RssCate, RssDetails} from "../rss/rss";
 import {Link, useLoaderData} from "react-router-dom";
-import {useMemo} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {catedatas} from "../catedatas/cate-list";
 import ContentOfPost from "./ContentOfPost";
 
@@ -385,10 +385,36 @@ export const Content = (props) => {
         </div>
     </section>)
 }
+const saveRecentlyViewedNews = (news) => {
+    if (news != null) {
+        const recentlyViewedNews = sessionStorage.getItem('recentlyViewedNews');
+        let newsList = recentlyViewedNews ? JSON.parse(recentlyViewedNews) : [];
+        //Kiểm tra xem tin tức đã tồn tại trong danh sách hay chưa
+        const existingNewsIndex = newsList.findIndex(item => item.link === news.link)
+        if (existingNewsIndex !== -1) {
+            newsList.splice(existingNewsIndex, 1);
+            newsList.unshift(news);
+        } else newsList.unshift(news); // Xóa tin tức đã tồn tại để đưa lên đầu danh sách
+
+        console.log(newsList)
+
+        sessionStorage.setItem('recentlyViewedNews', JSON.stringify(newsList));
+    }
+};
 
 export function NewsDetails() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
+    const [viewed, setViewed] = useState(null)
+    const item = RssCate(data.cate).find(item => item.link.indexOf(data.link.substring(5)) !== -1);
+
+    useEffect(() => {
+        if (item) {
+            setViewed(item)
+            saveRecentlyViewedNews(viewed)
+        }
+    }, [viewed, item])
+
     const post = RssDetails(memoizedUrl);
     return (<div key={data.link}>
         {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
@@ -397,3 +423,5 @@ export function NewsDetails() {
                 tiết... </h4>)}
     </div>)
 }
+
+

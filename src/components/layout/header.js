@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import watermark from "./watermark/watermark.png";
 import {catedatas} from "../../catedatas/cate-list";
 import {CateItem} from "./item-header";
@@ -10,7 +10,51 @@ const ItemOther = (data) => {
         <li><Link to={`${data.cate}`}>{data.name}</Link></li>
     )
 }
+const ModalViewed = () => {
+    const [viewedList, setViewedList] = useState(null);
+    useEffect(() => {
+        const recentlyViewedNews = sessionStorage.getItem('recentlyViewedNews');
+        setViewedList(recentlyViewedNews ? JSON.parse(recentlyViewedNews) : [])
+    }, [viewedList])
 
+    return (
+        <div className="modal fade" id="ModalViewed" tabIndex="-1" role="dialog"
+             aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+            <div className="modal-dialog" role="document">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div className="modal-body">
+                        {viewedList ? viewedList.map(news =>
+                            <div className="col-5">
+                                <div>
+                                    <Link to={`/${news.link.substring(20, news.link.indexOf(".htm"))}`}
+                                          className="wrap-pic-w hov1 trans-03">
+                                        <img src={news.imageUrl} alt="IMG"/>
+                                    </Link>
+                                    <div className="p-t-10">
+                                        <h5 className="p-b-5">
+                                            <Link
+                                                to={`/${news.link.substring(20, news.link.indexOf(".htm"))}`}
+                                                className="f1-s-5 cl3 hov-cl10 trans-03">
+                                                {news.title}
+                                            </Link>
+                                        </h5>
+                                        <span className="cl8"><span className="f1-s-3 m-rl-3">6/10/2023</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : <div/>}
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 export const Header = () => {
     return (
         <header>
@@ -127,6 +171,9 @@ export const Header = () => {
 							<i className="fa fa-angle-right" aria-hidden="true"></i>
 						</span>
                         </li>
+                        <li>
+                            <a href={"#"} data-toggle="modal" data-target=".bd-example-modal-lg">Tin đã đọc</a>
+                        </li>
                     </ul>
                 </div>
                 <div className="wrap-logo container">
@@ -151,11 +198,20 @@ export const Header = () => {
                                         )}
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href={"#"} data-toggle="modal" data-target="#ModalViewed">Tin tức vừa
+                                        xem</a>
+                                </li>
+                                <li>
+                                    <a href={"#"}>Tin tức đã lưu</a>
+                                </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
             </div>
+            <ModalViewed/>
         </header>
     )
 }
+
