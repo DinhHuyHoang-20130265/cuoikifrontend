@@ -7,10 +7,12 @@ import ContentOfPost from "./ContentOfPost";
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
     sessionStorage.setItem("link", `/` + params.cate + "/" + params.title + ".htm");
+    console.log(params)
     return {link: link, cate: params.cate, title: params.title};
 }
 
 export const Breadcrumb = (props) => {
+
     return (<div className="container">
         <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div className="f2-s-1 p-r-30 m-tb-6">

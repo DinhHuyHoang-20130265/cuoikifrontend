@@ -481,7 +481,7 @@ export const Latest = () => {
 
 export const Home = () => {
     return (
-        <div>
+        <div style={{marginTop: "20px"}}>
             <Post/>
             <Banner/>
             <Latest/>
