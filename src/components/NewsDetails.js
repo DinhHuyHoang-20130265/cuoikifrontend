@@ -3,7 +3,8 @@ import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
 import {catedatas} from "../catedatas/cate-list";
 import ContentOfPost from "./ContentOfPost";
-import { MDBBreadcrumb, MDBBreadcrumbItem } from 'mdb-react-ui-kit';
+import {MDBBreadcrumb, MDBBreadcrumbItem} from 'mdb-react-ui-kit';
+import {Comments, FacebookProvider} from "react-facebook";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
@@ -38,40 +39,19 @@ export const Breadcrumb = (props) => {
     </div>)
 }
 
-export const Comment = () => {
-    return (<div>
-        <h4 className="f1-l-4 cl3 p-b-12">
-            Leave a Comment
-        </h4>
-
-        <p className="f1-s-13 cl8 p-b-40">
-            Your email address will not be published. Required fields are marked *
-        </p>
-
-        <form>
-                <textarea className="bo-1-rad-3 bocl13 size-a-15 f1-s-13 cl5 plh6 p-rl-18 p-tb-14 m-b-20" name="msg"
-                          placeholder="Comment..."></textarea>
-
-            <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text" name="name"
-                   placeholder="Name*"/>
-            <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                   name="email" placeholder="Email*"/>
-
-            <input className="bo-1-rad-3 bocl13 size-a-16 f1-s-13 cl5 plh6 p-rl-18 m-b-20" type="text"
-                   name="website" placeholder="Website"/>
-
-            <button className="size-a-17 bg2 borad-3 f1-s-12 cl0 hov-btn1 trans-03 p-rl-15 m-t-10">
-                Post Comment
-            </button>
-        </form>
-    </div>)
+export const Comment = (props) => {
+    return (
+        <FacebookProvider appId="649226417231505">
+            <Comments href={"https://nld.com.vn/" + props.link.substring(5)}/>
+        </FacebookProvider>
+    );
 }
 
 export const MainContent = (props) => {
     return (<div className="col-md-10 col-lg-8 p-b-30">
         <div className="p-r-10 p-r-0-sr991">
             <ContentOfPost post={props.post} cate={props.cate}/>
-            <Comment></Comment>
+            <Comment link={props.link}></Comment>
         </div>
     </div>)
 }
@@ -389,7 +369,7 @@ export const Content = (props) => {
     return (<section className="bg0 p-b-140 p-t-10">
         <div className="container">
             <div className="row justify-content-center">
-                <MainContent post={props.post} cate={props.cate}></MainContent>
+                <MainContent link={props.link} post={props.post} cate={props.cate}></MainContent>
                 <Sidebar></Sidebar>
             </div>
         </div>
@@ -402,7 +382,7 @@ export function NewsDetails() {
     const post = RssDetails(memoizedUrl);
     return (<div key={data.link}>
         {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
-            <Content key={post} post={post} cate={data.cate}/></div>) : (
+            <Content link={data.link} key={post} post={post} cate={data.cate}/></div>) : (
             <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
                 tiết... </h4>)}
     </div>)
