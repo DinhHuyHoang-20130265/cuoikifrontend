@@ -6,6 +6,7 @@ import ContentOfPost from "./ContentOfPost";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
+    sessionStorage.setItem("link", `/` + params.cate + "/" + params.title + ".htm");
     return {link: link, cate: params.cate, title: params.title};
 }
 
