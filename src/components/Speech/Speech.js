@@ -92,9 +92,10 @@ const Speech = (data) => {
                 </table>
             </label>
             <div className={"btn-container d-flex justify-content-sm-around"}>
-                <button onClick={handlePlay}>{isPaused ? "Tiếp tục" : "Đọc"}</button>
-                <button onClick={handlePause}>Pause</button>
-                <button onClick={handleStop}>Stop</button>
+                <button onClick={handlePlay}>{!isPaused ? <i className={"fa fa-play"}></i> :
+                    <i className={"fa fa-angle-double-right"}></i>}</button>
+                <button onClick={handlePause}><i className={"fa fa-pause"}></i></button>
+                <button onClick={handleStop}><i className={"fa fa-stop"}></i></button>
             </div>
         </div>
     );

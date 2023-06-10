@@ -3,6 +3,7 @@ import {loadList, ListNews} from "../components/ListNews";
 import {loadDetails, NewsDetails} from "../components/NewsDetails";
 import {Home} from "../components/Home";
 import App from "../App";
+import {Viewed} from "../components/Viewed";
 
 export const webRouter = createBrowserRouter([{
     path: '/',
@@ -22,5 +23,10 @@ export const webRouter = createBrowserRouter([{
             path: ":cate/:title",
             element: <NewsDetails/>,
             loader: loadDetails
+        }, {
+            path: "history",
+            element: <Viewed/>
+        }, {
+            path: "saved"
         }]
 }]);

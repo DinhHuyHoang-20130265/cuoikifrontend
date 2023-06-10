@@ -67,7 +67,14 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
     src: url('fontsular.ttf');
 }
 
-
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /*padding: 10px;*/
+}
+.grid-item {
+    margin: 0 10px 0 10px;
+}
 /*//////////////////////////////////////////////////////////////////
 [ RS PLUGIN ]*/
 
