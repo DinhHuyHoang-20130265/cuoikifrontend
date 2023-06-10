@@ -77,7 +77,8 @@ function ShareFbButton() {
 
     return (
         <a onClick={handleFbShare}
-           className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+           className="dis-block f1-s-13 cl0 bg-facebook borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+           style={{color: "white"}}>
             <i className="fab fa-facebook-f m-r-7"></i>
             Facebook
         </a>
@@ -93,7 +94,8 @@ function ShareTwitterButton() {
 
     return (
         <a onClick={ShareTwitterButton}
-           className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03">
+           className="dis-block f1-s-13 cl0 bg-twitter borad-3 p-tb-4 p-rl-18 hov-btn1 m-r-3 m-b-3 trans-03"
+           style={{color: "white"}}>
             <i className="fab fa-twitter m-r-7"></i>
             Twitter
         </a>
