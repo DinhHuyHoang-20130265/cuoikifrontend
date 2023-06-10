@@ -3,6 +3,7 @@ import {Link, useLoaderData} from "react-router-dom";
 import {useMemo} from "react";
 import {catedatas} from "../catedatas/cate-list";
 import ContentOfPost from "./ContentOfPost";
+import { MDBBreadcrumb, MDBBreadcrumbItem } from 'mdb-react-ui-kit';
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
@@ -13,15 +14,25 @@ export const Breadcrumb = (props) => {
     return (<div className="container">
         <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
             <div className="f2-s-1 p-r-30 m-tb-6">
-                <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
-                    Trang chủ
-                </Link>
-                <Link to={`/${props.cate}`} className="breadcrumb-item f1-s-3 cl9">
-                    {catedatas.find(item => item.cate === props.cate).name}
-                </Link>
-                <span className="breadcrumb-item f1-s-3 cl9">
-					 {props.title}
-                </span>
+                <>
+                    <MDBBreadcrumb>
+                        <MDBBreadcrumbItem>
+                            <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
+                                Trang chủ
+                            </Link>
+                        </MDBBreadcrumbItem>
+                        <MDBBreadcrumbItem>
+                            <Link to={`/${props.cate}`} className="breadcrumb-item f1-s-3 cl9">
+                                {catedatas.find(item => item.cate === props.cate).name}
+                            </Link>
+                        </MDBBreadcrumbItem>
+                        <MDBBreadcrumbItem active>
+                            <span className="breadcrumb-item f1-s-3 cl9">
+					            {props.title}
+                            </span>
+                        </MDBBreadcrumbItem>
+                    </MDBBreadcrumb>
+                </>
             </div>
         </div>
     </div>)
