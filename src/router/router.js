@@ -4,6 +4,7 @@ import {loadDetails, NewsDetails} from "../components/NewsDetails";
 import {Home} from "../components/Home";
 import App from "../App";
 import {Viewed} from "../components/Viewed";
+import {SavedPost} from "../components/SavedPost";
 
 export const webRouter = createBrowserRouter([{
     path: '/',
@@ -27,6 +28,7 @@ export const webRouter = createBrowserRouter([{
             path: "history",
             element: <Viewed/>
         }, {
-            path: "saved"
+            path: "saved",
+            element: <SavedPost/>
         }]
 }]);

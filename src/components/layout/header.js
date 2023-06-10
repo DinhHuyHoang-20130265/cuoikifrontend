@@ -175,6 +175,14 @@ export const Header = () => {
 							<i className="fa fa-angle-right" aria-hidden="true"></i>
 						</span>
                         </li>
+                        <li>
+                            {/*<a href={"#"} data-toggle="modal" data-target="#ModalViewed">*/}
+                            <Link to={"/history"}><i
+                                className={"fa fa-history"}></i></Link>
+                        </li>
+                        <li>
+                            <Link to={"/saved"}><i className={"fa fa-bookmark"}></i></Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="wrap-logo container">
@@ -205,7 +213,7 @@ export const Header = () => {
                                         className={"fa fa-history"}></i></Link>
                                 </li>
                                 <li>
-                                    <a href={"#"}><i className={"fa fa-bookmark"}></i></a>
+                                    <Link to={"/saved"}><i className={"fa fa-bookmark"}></i></Link>
                                 </li>
                             </ul>
                         </nav>
