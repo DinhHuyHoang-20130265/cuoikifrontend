@@ -1,0 +1,19 @@
+.container-speech {
+  padding-left: calc(100% - 400px);
+}
+.container-speech td {
+  padding-left: 10px;
+}
+.container-speech .btn-container {
+  display: flex;
+}
+.container-speech .btn-container button {
+  border: none;
+  background-color: #6c757d;
+  padding: 5px;
+  border-radius: 5px;
+  width: 65px;
+  color: whitesmoke;
+}
+
+/*# sourceMappingURL=style.css.map */

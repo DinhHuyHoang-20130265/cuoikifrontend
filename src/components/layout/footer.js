@@ -19,12 +19,15 @@ const FooterItem = (data) => {
     const [item, setItem] = useState(data)
     return (
         <li className="flex-wr-sb-s p-b-20">
-            <Link to={`news/${item.link}`} className="size-w-4 wrap-pic-w hov1 trans-03">
+            <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                  className="size-w-4 wrap-pic-w hov1 trans-03">
                 <img alt="IMG" src={item.imageUrl}></img>
             </Link>
             <div className="size-w-5">
                 <h6 className="p-b-5">
-                    <Link to={`news/${item.link}`} className="f1-s-5 cl11 hov-cl10 trans-03">
+                    <Link
+                        to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
+                        className="f1-s-5 cl11 hov-cl10 trans-03">
                         {item.title}
                     </Link>
                 </h6>
@@ -87,10 +90,11 @@ export const Footer = () => {
                                 </div>
                                 <ul>
                                     {
-                                        list.slice(0, 3).map(item => <FooterItem title={item.title}
-                                                                                 imageUrl={item.imageUrl}
-                                                                                 pubDate={item.pubDate}
-                                                                                 link={item.link}/>)}
+                                        list.slice(0, 3).map(item => <FooterItem
+                                            cate={"tin-moi-nhat"} title={item.title}
+                                            imageUrl={item.imageUrl}
+                                            pubDate={item.pubDate}
+                                            link={item.link}/>)}
                                 </ul>
                             </div>
                             <div className="col-sm-6 col-lg-4 p-b-20">

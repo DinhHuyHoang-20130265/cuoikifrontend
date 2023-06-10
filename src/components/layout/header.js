@@ -3,6 +3,7 @@ import watermark from "./watermark/watermark.png";
 import {catedatas} from "../../catedatas/cate-list";
 import {CateItem} from "./item-header";
 import {Link} from "react-router-dom";
+import Weather from "./weather";
 
 const ItemOther = (data) => {
     return (
@@ -17,6 +18,7 @@ export const Header = () => {
                 <div className="topbar">
                     <div className="content-topbar container h-100">
                         <div className="left-topbar">
+                            <Weather/>
                             <a href={"#"} className="left-topbar-item">
                                 Giới thiệu
                             </a>
@@ -47,7 +49,7 @@ export const Header = () => {
 
                 <div className="wrap-header-mobile">
                     <div className="logo-mobile">
-                        <a><img src={watermark} alt="IMG-LOGO"></img></a>
+                        <Link to={"/home"}><img src={watermark} alt="IMG-LOGO"></img></Link>
                     </div>
 
                     <div className="btn-show-menu-mobile hamburger hamburger--squeeze m-r--8">
@@ -59,6 +61,7 @@ export const Header = () => {
                 <div className="menu-mobile">
                     <ul className="topbar-mobile">
                         <li className="left-topbar">
+                            <Weather/>
                             <a href="#" className="left-topbar-item">
                                 Giới thiệu
                             </a>
@@ -128,16 +131,16 @@ export const Header = () => {
                 </div>
                 <div className="wrap-logo container">
                     <div className="logo">
-                        <a><img src={watermark} alt="LOGO"></img></a>
+                        <Link to={"/home"}><img src={watermark} alt="LOGO"></img></Link>
                     </div>
 
                 </div>
                 <div className="wrap-main-nav">
                     <div className="main-nav">
                         <nav className="menu-desktop">
-                            <a className="logo-stick">
+                            <Link to={"/home"} className="logo-stick">
                                 <img alt="LOGO" src={watermark}></img>
-                            </a>
+                            </Link>
                             <ul className="main-menu">
                                 {catedatas.slice(0, 5).map(cate => <CateItem name={cate.name} cate={cate.cate}/>)}
                                 <li>

@@ -15,12 +15,7 @@ export const Breadcrumb = (params) => {
                     <span
                         className="breadcrumb-item f1-s-3 cl9">{catedatas.find(item => item.cate === params.cate).name}</span>
                 </div>
-                <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6">
-                    <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
-                           placeholder="Search"/>
-                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                        <i className="zmdi zmdi-search"></i>
-                    </button>
+                <div className="pos-relative size-a-2 of-hidden bocl11 m-tb-6">
                 </div>
             </div>
         </div>
@@ -29,7 +24,7 @@ export const Breadcrumb = (params) => {
 
 export const PageHeading = (params) => {
     return (
-        <div className="container p-t-4 p-b-40">
+        <div className="container p-t-4">
             <h2 className="f1-l-1 cl2">
                 {params.name}
             </h2>
@@ -39,7 +34,7 @@ export const PageHeading = (params) => {
 export const PostItem = (params) => {
     return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
         <div className="m-b-45">
-            <Link to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+            <Link to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
                   className="wrap-pic-w hov1 trans-03">
                 <img src={params.imageUrl} alt="IMG"/>
             </Link>
@@ -47,7 +42,7 @@ export const PostItem = (params) => {
             <div className="p-t-16">
                 <h5 className="p-b-5">
                     <Link
-                        to={`/news/${params.link.substring(params.link.lastIndexOf("/") + 1, params.link.indexOf(".htm"))}`}
+                        to={`/${params.link.substring(20, params.link.indexOf(".htm"))}`}
                         className="f1-m-3 cl2 hov-cl10 trans-03">
                         {params.title}
                     </Link>
@@ -90,29 +85,75 @@ export const Pagination = (params) => {
         </div>
     )
 }
-
 export const PostLeft = (params) => {
     const [cate, setCate] = useState(params);
+    const [selectedOption, setSelectedOption] = useState("1");
     const [currentPage, setCurrentPage] = useState(1);
-    const list = RssCate(cate.cate);
+    const [currentList, setCurrentList] = useState(null);
+    const [searchKey, setSearch] = useState("");
+    const [filtered, setFilteredList] = useState(null);
 
     useEffect(() => {
         setCurrentPage(1);
     }, [params]);
 
-    let indexOfLastPost = currentPage * 6;
-    let indexOfFirstPost = indexOfLastPost - 6;
-    let currentPosts = list.slice(indexOfFirstPost, indexOfLastPost);
+    const list = RssCate(cate.cate);
+
+    useEffect(() => {
+        if (list) {
+            let filteredList = list.filter(item => item.title.toUpperCase().indexOf(searchKey.toUpperCase()) !== -1).sort((a, b) => {
+                return (selectedOption === "2") ? new Date(a.pubDate) - new Date(b.pubDate) : new Date(b.pubDate) - new Date(a.pubDate)
+            });
+            setFilteredList(filteredList)
+            let indexOfLastPost = currentPage * 6;
+            let indexOfFirstPost = indexOfLastPost - 6;
+            let currentPosts = filteredList.slice(indexOfFirstPost, indexOfLastPost);
+            setCurrentList(currentPosts);
+        }
+    }, [list, currentPage, searchKey, selectedOption]);
+
 
     function handlePageClick(page) {
         setCurrentPage(page);
-        console.log(currentPosts)
+    }
+
+    function search(text) {
+        setSearch(text)
+        setCurrentPage(1);
+    }
+
+    function toSearchSite() {
+
+    }
+
+    const changeOrder = (event) => {
+        setSelectedOption(event.target.value);
     };
 
     return (
         <div className="col-md-10 col-lg-8 p-b-80">
-            <ListPost key={cate.cate} list={currentPosts}></ListPost>
-            <Pagination numb={list.length} currentPage={currentPage} handlePageClick={handlePageClick}></Pagination>
+            <div className={"d-flex"}>
+                <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
+                    <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
+                           placeholder="Tìm bài báo..." onChange={e => search(e.target.value)}/>
+                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03" onClick={toSearchSite}>
+                        <i className="zmdi zmdi-search"></i>
+                    </button>
+                </div>
+                <select className={"select size-a-2 bo-1-rad-5 of-hidden bocl11 m-tb-6 m-b-30"}
+                        style={{marginLeft: "55%",}} onChange={changeOrder}>
+                    <option value="1" selected={true}>Mới nhất</option>
+                    <option value="2">Cũ nhất</option>
+                </select>
+            </div>
+            {currentList && <ListPost key={cate.cate} list={currentList}></ListPost>}
+            {currentList && (
+                <Pagination numb={filtered.length > 6 ? filtered.length : currentList.length} currentPage={currentPage}
+                            handlePageClick={handlePageClick}></Pagination>
+            )}
+            {!currentList &&
+                <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị danh
+                    sách theo danh mục tương ứng... </h4>}
         </div>
     )
 }
@@ -261,7 +302,7 @@ export const Sidebar = () => {
 
 export const Post = (params) => {
     return (
-        <section className="bg0 p-t-70 p-b-55">
+        <section className="bg0 p-t-10 p-b-55">
             <div className="container">
                 <div className="row justify-content-center">
                     <PostLeft key={cate.cate} cate={params.cate}></PostLeft>
@@ -271,9 +312,6 @@ export const Post = (params) => {
         </section>
     )
 }
-export const handleNextItem = () => {
-    console.log("count");
-};
 
 export function ListNews() {
     const cate = useLoaderData();
@@ -285,5 +323,5 @@ export function ListNews() {
 }
 
 export async function loadList({params}) {
-    return catedatas.find(item => item.cate == params.cate);
+    return catedatas.find(item => item.cate === params.cate);
 }

@@ -9,7 +9,7 @@ const Element = (data) => {
     const [itemElement, setItem] = useState(data)
     const list = RssCate(itemElement.cate)
     if (list.length < 1) {
-        return (<div></div>)
+        return (<div>Nothing</div>)
     }
     return (
         <div className="p-b-20">
@@ -45,14 +45,14 @@ const Element = (data) => {
 const MainPost = (data) => {
     return (<div className="col-sm-6 p-r-25 p-r-15-sr991">
         <div className="m-b-30">
-            <Link to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+            <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                   className="wrap-pic-w hov1 trans-03">
                 <img src={data.imageUrl} alt="IMG"></img>
             </Link>
             <div className="p-t-20">
                 <h5 className="p-b-5">
                     <Link
-                        to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                        to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                         className="f1-m-3 cl2 hov-cl10 trans-03">
                         {data.title}
                     </Link>
@@ -69,7 +69,7 @@ const MainPost = (data) => {
 }
 const ItemPost = (data) => {
     return (<div className="flex-wr-sb-s m-b-30">
-        <Link to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+        <Link to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
               className="size-w-1 wrap-pic-w hov1 trans-03">
             <img src={data.imageUrl} alt="IMG"></img>
         </Link>
@@ -77,7 +77,7 @@ const ItemPost = (data) => {
         <div className="size-w-2">
             <h5 className="p-b-5">
                 <Link
-                    to={`/${data.cate}/${data.link.substring(data.link.lastIndexOf("/") + 1, data.link.indexOf(".htm"))}`}
+                    to={`/${data.link.substring(20, data.link.indexOf(".htm"))}`}
                     className="f1-s-5 cl3 hov-cl10 trans-03">
                     {data.title}
                 </Link>
@@ -478,29 +478,10 @@ export const Latest = () => {
     )
 }
 
-export const Search = () => {
-    return (
-        <div className="container">
-            <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div className="f2-s-1 p-r-30 size-w-0 m-tb-6 flex-wr-s-c">
-                </div>
-
-                <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 ali-c">
-                    <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-45" type="text" name="search"
-                           placeholder="Search"></input>
-                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
-                        <i className="zmdi zmdi-search"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    )
-}
 
 export const Home = () => {
     return (
         <div>
-            <Search/>
             <Post/>
             <Banner/>
             <Latest/>

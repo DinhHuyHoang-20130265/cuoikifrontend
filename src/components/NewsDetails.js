@@ -400,8 +400,10 @@ export function NewsDetails() {
     const data = useLoaderData();
     const memoizedUrl = useMemo(() => data.link, [data]);
     const post = RssDetails(memoizedUrl);
-    return (<div>
+    return (<div key={data.link}>
         {post ? (<div><Breadcrumb key={data} cate={data.cate} title={post.title}/>
-            <Content key={data} post={post} cate={data.cate}/></div>) : (<p>Loading</p>)}
+            <Content key={post} post={post} cate={data.cate}/></div>) : (
+            <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị chi
+                tiết... </h4>)}
     </div>)
 }
