@@ -3,13 +3,14 @@ import {Link, useLoaderData} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
 import {useEffect, useState} from "react";
 import Error404 from "./Error404";
+import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
 
 let cate = "";
 export const Breadcrumb = (params) => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div className="f2-s-1 p-r-30 m-tb-6">
+                <div className="f2-s-1 p-r-30 m-tb-6" >
                     <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
                         Trang chủ
                     </Link>
@@ -93,9 +94,10 @@ export const PostLeft = (params) => {
     const [currentList, setCurrentList] = useState(null);
     const [searchKey, setSearch] = useState("");
     const [filtered, setFilteredList] = useState(null);
-
+    const [typeSearch, setTypeSearch] = useState(null);
     useEffect(() => {
         setCurrentPage(1);
+        setTypeSearch(0);
     }, [params]);
 
     const list = RssCate(cate.cate);
@@ -123,9 +125,25 @@ export const PostLeft = (params) => {
         setCurrentPage(1);
     }
 
-    function toSearchSite() {
+    const {transcript, listening, resetTranscript} = useSpeechRecognition();
 
+    const reset = () => {
+        resetTranscript();
+        setSearch("");
     }
+    const startListening = () => {
+        SpeechRecognition.startListening({continuous: true});
+    };
+    const changeSearch = () => {
+        if (typeSearch === 0)
+            setTypeSearch(1)
+        else setTypeSearch(0);
+        reset()
+        setSearch("");
+    }
+    const stopListening = () => {
+        SpeechRecognition.stopListening();
+    };
 
     const changeOrder = (event) => {
         setSelectedOption(event.target.value);
@@ -133,16 +151,33 @@ export const PostLeft = (params) => {
 
     return (
         <div className="col-md-10 col-lg-8 p-b-80">
-            <div className={"d-flex"}>
-                <div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
-                    <input className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
-                           placeholder="Tìm bài báo..." onChange={e => search(e.target.value)}/>
-                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03" onClick={toSearchSite}>
+            <div className={"d-flex"} style={{justifyContent:"space-between"}}>
+                {typeSearch === 0 ? (<div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
+                    <input key={0} className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
+                           placeholder="Tìm tin tức..." onChange={e => search(e.target.value)}
+                    />
+                    <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
                         <i className="zmdi zmdi-search"></i>
                     </button>
+                </div>) : (<div className={"pos-relative bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30"} style={{display: "inline-flex"}}>
+                    <input key={1} className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
+                           placeholder="Tìm tin tức..." value={transcript}/>
+                    <button onClick={!listening ? startListening : stopListening} style={{marginRight:"8px"}}>
+                        <i className={`fa ${!listening ? "fa-microphone" : "fa-pause"}`}></i>
+                    </button>
+                    <button onClick={reset} className={"m-l--4"} style={{marginRight:"8px",fontSize:"18px", fontWeight:"600"}}>
+                        X
+                    </button>
+                    <button onClick={() => {setSearch(transcript)}} className={"m-l--4"} style={{marginRight:"8px"}}>
+                        <i className={"fa fa-search"}></i>
+                    </button>
+                </div>)}
+                <div className={"pos-relative bo-1-rad-22 of-hidden m-tb-6 m-b-30"} style={{border:"none", padding:"6px"}} >
+                    <button onClick={changeSearch} style={{fontSize:"22px"}}>
+                        {typeSearch === 0 ? (<i className={"fa fa-microphone"}></i>):(<i className={"zmdi zmdi-search-for"}></i>)}
+                    </button>
                 </div>
-                <select className={"select size-a-2 bo-1-rad-5 of-hidden bocl11 m-tb-6 m-b-30"}
-                        style={{marginLeft: "55%",}} onChange={changeOrder}>
+                <select className={"select size-a-2 bo-1-rad-5 of-hidden bocl11 m-tb-6 m-b-30"} onChange={changeOrder}>
                     <option value="1" selected={true}>Mới nhất</option>
                     <option value="2">Cũ nhất</option>
                 </select>
