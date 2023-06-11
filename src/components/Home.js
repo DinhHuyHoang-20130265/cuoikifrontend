@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import {catedatas} from "../catedatas/cate-list";
 import {useDispatch} from "react-redux";
 import banner from "./layout/watermark/banner_nlu.jpg";
+import Sidebar from "./layout/Sidebar"
 
 const Element = (data) => {
     const [itemElement, setItem] = useState(data)
@@ -103,73 +104,7 @@ export const Post = () => {
                     <div className="col-md-10 col-lg-8">
                         {catedatas.slice(0, 3).map(item => <Element cate={item.cate} name={item.name}/>)}
                     </div>
-
-                    <div className="col-md-10 col-lg-4">
-                        <div className="p-l-10 p-rl-0-sr991 p-b-20">
-                            <div>
-                                <div className="how2 how2-cl4 flex-s-c">
-                                    <h3 className="f1-m-2 cl3 tab01-title">
-                                        Các bài báo nổi bật nhất
-                                    </h3>
-                                </div>
-
-                                <ul className="p-t-35">
-                                    <li className="flex-wr-sb-s p-b-22">
-                                        <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                            1
-                                        </div>
-
-                                        <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Lorem
-                                        </a>
-                                    </li>
-
-                                    <li className="flex-wr-sb-s p-b-22">
-                                        <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                            2
-                                        </div>
-
-                                        <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Proin velit consectetur non neque
-                                        </a>
-                                    </li>
-
-                                    <li className="flex-wr-sb-s p-b-22">
-                                        <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                            3
-                                        </div>
-
-                                        <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-                                        </a>
-                                    </li>
-
-                                    <li className="flex-wr-sb-s p-b-22">
-                                        <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                                            4
-                                        </div>
-
-                                        <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Proin velit justo consectetur non neque elementum
-                                        </a>
-                                    </li>
-
-                                    <li className="flex-wr-sb-s p-b-22">
-                                        <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-                                            5
-                                        </div>
-
-                                        <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                                            Proin velit consectetur non neque
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className="flex-c-s p-t-8">
-
-                            </div>
-                        </div>
-                    </div>
+                    <Sidebar/>
                 </div>
             </div>
         </section>
@@ -177,7 +112,7 @@ export const Post = () => {
 }
 export const Banner = () => {
     return (
-        <div className="container">
+        <div className="container m-b-40">
             <div className="flex-c-c">
                 <a href="#">
                     <img style={{height: "100px"}} src={banner} alt="IMG"></img>
@@ -478,7 +413,6 @@ export const Home = () => {
         <div style={{marginTop: "20px"}}>
             <Post/>
             <Banner/>
-            <Latest/>
         </div>
     )
 }

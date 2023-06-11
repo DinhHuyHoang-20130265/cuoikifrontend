@@ -4,6 +4,7 @@ import {catedatas} from "../catedatas/cate-list";
 import {useEffect, useState} from "react";
 import Error404 from "./Error404";
 import SpeechRecognition, {useSpeechRecognition} from 'react-speech-recognition';
+import Sidebar from "./layout/Sidebar";
 
 let cate = "";
 export const Breadcrumb = (params) => {
@@ -194,155 +195,13 @@ export const PostLeft = (params) => {
     )
 }
 
-export const Subscribe = () => {
-    return (
-        <div className="bg10 p-rl-35 p-t-28 p-b-35 m-b-50">
-            <h5 className="f1-m-5 cl0 p-b-10">
-                Subscribe
-            </h5>
-
-            <p className="f1-s-1 cl0 p-b-25">
-                Get all latest content delivered to your email a few times a month.
-            </p>
-
-            <form className="size-a-9 pos-relative">
-                <input className="s-full f1-m-6 cl6 plh9 p-l-20 p-r-55" type="text" name="email" placeholder="Email"/>
-
-                <button className="size-a-10 flex-c-c ab-t-r fs-16 cl9 hov-cl10 trans-03">
-                    <i className="fa fa-arrow-right"></i>
-                </button>
-            </form>
-        </div>
-    )
-}
-export const MostPopular = () => {
-    return (
-        <div className="p-b-23">
-            <div className="how2 how2-cl4 flex-s-c">
-                <h3 className="f1-m-2 cl3 tab01-title">
-                    Most Popular
-                </h3>
-            </div>
-
-            <ul className="p-t-35">
-                <li className="flex-wr-sb-s p-b-22">
-                    <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        1
-                    </div>
-
-                    <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                    </a>
-                </li>
-
-                <li className="flex-wr-sb-s p-b-22">
-                    <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        2
-                    </div>
-
-                    <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit consectetur non neque
-                    </a>
-                </li>
-
-                <li className="flex-wr-sb-s p-b-22">
-                    <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        3
-                    </div>
-
-                    <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Nunc vestibulum, enim vitae condimentum volutpat lobortis ante
-                    </a>
-                </li>
-
-                <li className="flex-wr-sb-s p-b-22">
-                    <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0 m-b-6">
-                        4
-                    </div>
-
-                    <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit justo consectetur non neque elementum
-                    </a>
-                </li>
-
-                <li className="flex-wr-sb-s p-b-22">
-                    <div className="size-a-8 flex-c-c borad-3 size-a-8 bg9 f1-m-4 cl0">
-                        5
-                    </div>
-
-                    <a href="#" className="size-w-3 f1-s-7 cl3 hov-cl10 trans-03">
-                        Proin velit consectetur non neque
-                    </a>
-                </li>
-            </ul>
-        </div>
-    )
-}
-
-export const Advertisement = () => {
-    return (
-        <div className="flex-c-s p-b-50">
-            <a href="#">
-                <img className="max-w-full" src="images/banner-02.jpg" alt="IMG"/>
-            </a>
-        </div>
-    )
-}
-
-export const TagCate = () => {
-    return (
-        <div>
-            <div className="how2 how2-cl4 flex-s-c m-b-30">
-                <h3 className="f1-m-2 cl3 tab01-title">
-                    Tags
-                </h3>
-            </div>
-
-            <div className="flex-wr-s-s m-rl--5">
-                <a href="#"
-                   className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                    Fashion
-                </a>
-
-                <a href="#"
-                   className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                    Lifestyle
-                </a>
-
-                <a href="#"
-                   className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                    Denim
-                </a>
-
-                <a href="#"
-                   className="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-                    Streetstyle
-                </a>
-            </div>
-        </div>
-    )
-}
-
-export const Sidebar = () => {
-    return (
-        <div className="col-md-10 col-lg-4 p-b-80">
-            <div className="p-l-10 p-rl-0-sr991">
-                <Subscribe></Subscribe>
-                <MostPopular></MostPopular>
-                <Advertisement></Advertisement>
-                <TagCate></TagCate>
-            </div>
-        </div>
-    )
-}
-
 export const Post = (params) => {
     return (
         <section className="bg0 p-t-10 p-b-55">
             <div className="container">
                 <div className="row justify-content-center">
                     <PostLeft key={cate.cate} cate={params.cate}></PostLeft>
-                    <Sidebar></Sidebar>
+                    <Sidebar/>
                 </div>
             </div>
         </section>
