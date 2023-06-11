@@ -39,24 +39,10 @@ function ContentOfPost(props) {
 
         <div className={"main-content"} ref={contentRef}/>
 
-        <div className="flex-s-s p-t-12 p-b-15">
-								<span className="f1-s-12 cl5 m-r-8">
-									Tags:
-								</span>
-            <div className="flex-wr-s-s size-w-0">
-                <a href="#" className="f1-s-12 cl8 hov-link1 m-r-15">
-                    Streetstyle
-                </a>
 
-                <a href="#" className="f1-s-12 cl8 hov-link1 m-r-15">
-                    Crafts
-                </a>
-            </div>
-        </div>
-
-        <div className="flex-s-s">
+        <div className="flex-s-s m-t-40">
 								<span className="f1-s-12 cl5 p-t-1 m-r-15">
-									Share:
+									Chia sẻ:
 								</span>
 
             <div className="flex-wr-s-s size-w-0">
