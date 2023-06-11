@@ -10,7 +10,7 @@ export const Breadcrumb = (params) => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div className="f2-s-1 p-r-30 m-tb-6" >
+                <div className="f2-s-1 p-r-30 m-tb-6 d-flex" >
                     <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
                         Trang chủ
                     </Link>

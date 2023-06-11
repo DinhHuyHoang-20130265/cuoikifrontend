@@ -42,7 +42,7 @@ export const Breadcrumb = (props) => {
 
     return (<div className="container">
         <div className="headline bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-            <div className="f2-s-1 p-r-30 m-tb-6">
+            <div className="f2-s-1 p-r-30 m-tb-6 d-flex">
                 <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
                     Trang chủ
                 </Link>
@@ -54,7 +54,7 @@ export const Breadcrumb = (props) => {
                 </span>
             </div>
         </div>
-        <a href={"#"} onClick={() => savedNews(props.item)}>
+        <a href={"#"} onClick={() => savedNews(props.item)} style={{fontSize:"24px"}}>
             <i className={"fa fa-bookmark"}
                style={{color: (isSaved ? "yellow" : "blue")}}></i></a>
     </div>)
