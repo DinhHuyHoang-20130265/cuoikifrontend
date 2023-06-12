@@ -65,8 +65,9 @@ export const Breadcrumb = (props) => {
 export const Comment = (props) => {
     return (
         <FacebookProvider appId="649226417231505">
-            {/*<Comments href={"/" + props.link.substring(5)}/> */}
-            <Comments href={"https://news-website-e7591.web.app/" + props.link.substring(5)}/>
+            <Comments
+                href={`http://127.0.0.1:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
+            {/*<Comments href={"https://news-website-e7591.web.app/" + props.link.substring(5, props.link.indexOf('.htm'))}/>*/}
         </FacebookProvider>
     );
 }
