@@ -56,7 +56,7 @@ export const Breadcrumb = (props) => {
                 </span>
             </div>
         </div>
-        <a href={"#"} onClick={() => savedNews(props.item)} style={{fontSize:"24px"}}>
+        <a href={"#"} onClick={() => savedNews(props.item)} style={{fontSize: "24px"}}>
             <i className={"fa fa-bookmark"}
                style={{color: (isSaved ? "yellow" : "blue")}}></i></a>
     </div>)
@@ -81,11 +81,60 @@ export const MainContent = (props) => {
 
 
 export const Content = (props) => {
-    return (<section className="bg0 p-b-140 p-t-10">
+    return (<section className="bg0 p-t-10">
         <div className="container">
             <div className="row justify-content-center">
                 <MainContent link={props.link} post={props.post} cate={props.cate}></MainContent>
                 <Sidebar/>
+                <SameNews link={props.link}></SameNews>
+            </div>
+        </div>
+    </section>)
+}
+export const SameItem = ({item}) => {
+    return (
+        <div style={{marginRight: "50px"}}>
+            <div className="m-b-45" style={{width: "250px"}}>
+                <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}
+                      className="wrap-pic-w hov1 trans-03">
+                    <img src={item.imageUrl} alt="IMG"/>
+                </Link>
+
+                <div className="p-t-16">
+                    <h5 className="p-b-5">
+                        <Link to={`/${item.link.substring(20, item.link.indexOf(".htm"))}`}
+                              className="f1-m-3 cl2 hov-cl10 trans-03">
+                            {item.title}
+                        </Link>
+                    </h5>
+
+                    <span className="cl8">
+                  <span className="f1-s-3"> {item.pubDate}</span>
+                </span>
+                </div>
+            </div>
+        </div>
+    )
+}
+export const SameNews = ({link}) => {
+    const [sameList, setSameList] = useState(null);
+    const [cate, setCate] = useState(null);
+    useEffect(() => {
+        setCate(link.substring(5, link.lastIndexOf("/")))
+    }, [cate])
+
+    const list = RssCate(cate).filter(item => item.link.indexOf(link.substring(5)) === -1);
+    useEffect(() => {
+        setSameList(list.slice(0, 4))
+    }, [sameList])
+
+    return (<section className="bg0">
+        <div className="p-t-4 p-b-40" style={{textAlign: "center", fontWeight:"bold"}}>
+            <h2 className="f1-l-1 cl2">Tin tức tương tự</h2>
+        </div>
+        <div className="col-md-10 col-lg-8">
+            <div style={{display: "inline-flex", marginLeft: "50px"}}>
+                {sameList ? sameList.map(item => <SameItem item={item}/>) : <p>Loading</p>}
             </div>
         </div>
     </section>)
