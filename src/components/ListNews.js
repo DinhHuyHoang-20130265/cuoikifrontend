@@ -144,6 +144,7 @@ export const PostLeft = (params) => {
     }
     const stopListening = () => {
         SpeechRecognition.stopListening();
+        setSearch(transcript)
     };
 
     const changeOrder = (event) => {
@@ -162,15 +163,14 @@ export const PostLeft = (params) => {
                     </button>
                 </div>) : (<div className={"pos-relative bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30"} style={{display: "inline-flex"}}>
                     <input key={1} className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
-                           placeholder="Tìm tin tức..." value={transcript}/>
+                           placeholder={`${!listening ? "Nhấn để nói..." : "Hãy nói gì đó..."}`} value={transcript}/>
+                    {searchKey && (
+                        <button onClick={reset} className={"m-l--4"} style={{marginRight:"8px",fontSize:"18px", fontWeight:"400"}}>
+                            x
+                        </button>
+                    )}
                     <button onClick={!listening ? startListening : stopListening} style={{marginRight:"8px"}}>
-                        <i className={`fa ${!listening ? "fa-microphone" : "fa-pause"}`}></i>
-                    </button>
-                    <button onClick={reset} className={"m-l--4"} style={{marginRight:"8px",fontSize:"18px", fontWeight:"600"}}>
-                        X
-                    </button>
-                    <button onClick={() => {setSearch(transcript)}} className={"m-l--4"} style={{marginRight:"8px"}}>
-                        <i className={"fa fa-search"}></i>
+                        <i className={`fa ${!listening ? "fa-microphone" : "fa-search"}`}></i>
                     </button>
                 </div>)}
                 <div className={"pos-relative bo-1-rad-22 of-hidden m-tb-6 m-b-30"} style={{border:"none", padding:"6px"}} >
@@ -220,6 +220,5 @@ export function ListNews() {
 
 export async function loadList({params}) {
     const cate = catedatas.find(item => item.cate === params.cate);
-    console.log(cate)
     return (typeof cate === 'undefined' ? null : cate);
 }
