@@ -7,7 +7,8 @@ export const RssCate = (cate) => {
     const [feeds, setFeeds] = useState([]);
 
     useEffect(() => {
-        const url = `/api/${cate}.rss`;
+        // const url = `/api/${cate}.rss`;
+        const url = `https://api.allorigins.win/raw?url=https://nld.com.vn/${cate}.rss`;
 
         axios.get(url).then(response => {
             const xml = response.data;
@@ -46,7 +47,8 @@ export const RssDetails = (titleUrl) => {
 
     useEffect(() => {
         async function getPost() {
-            await axios.get(titleUrl).then(response => {
+            //await axios.get(titleUrl).then(response => {
+            await axios.get(`https://api.allorigins.win/raw?url=https://nld.com.vn/` + titleUrl.substring(5)).then(response => {
                 const $ = cheerio.load(response.data);
                 const title = $("h1.title-content").text();
                 const date = $("p.dateandcat.clearfix").text();
