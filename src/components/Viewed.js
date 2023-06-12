@@ -8,12 +8,12 @@ export const Breadcrumb = () => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div className="f2-s-1 p-r-30 m-tb-6">
+                <div className="f2-s-1 p-r-30 m-tb-6 d-flex">
                     <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
                         Trang chủ
                     </Link>
                     <Link to={"/history"}
-                          className="breadcrumb-item f1-s-3 cl9">Lịch sử</Link>
+                          className="breadcrumb-item f1-s-3 cl9">Tin tức đã xem</Link>
                 </div>
                 <div className="pos-relative size-a-2 of-hidden bocl11 m-tb-6">
                 </div>
@@ -26,7 +26,7 @@ export const PageHeading = () => {
     return (
         <div className="container p-t-4">
             <h2 className="f1-l-1 cl2">
-                Lịch sử đã xem
+                Tin tức đã xem
             </h2>
         </div>
     )
