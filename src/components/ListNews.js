@@ -172,9 +172,6 @@ export const PostLeft = (params) => {
                     <button onClick={!listening ? startListening : stopListening} style={{marginRight:"8px"}}>
                         <i className={`fa ${!listening ? "fa-microphone" : "fa-search"}`}></i>
                     </button>
-                    {/*<button onClick={() => {setSearch(transcript)}} className={"m-l--4"} style={{marginRight:"8px"}}>*/}
-                    {/*    <i className={"fa fa-search"}></i>*/}
-                    {/*</button>*/}
                 </div>)}
                 <div className={"pos-relative bo-1-rad-22 of-hidden m-tb-6 m-b-30"} style={{border:"none", padding:"6px"}} >
                     <button onClick={changeSearch} style={{fontSize:"22px"}}>
@@ -223,6 +220,5 @@ export function ListNews() {
 
 export async function loadList({params}) {
     const cate = catedatas.find(item => item.cate === params.cate);
-    console.log(cate)
     return (typeof cate === 'undefined' ? null : cate);
 }
