@@ -65,7 +65,9 @@ export const Breadcrumb = (props) => {
 export const Comment = (props) => {
     return (
         <FacebookProvider appId="649226417231505">
-            <Comments href={"https://nld.com.vn/" + props.link.substring(5)}/>
+            <Comments
+                href={`http://127.0.0.1:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
+            {/*<Comments href={"https://news-website-e7591.web.app/" + props.link.substring(5, props.link.indexOf('.htm'))}/>*/}
         </FacebookProvider>
     );
 }
@@ -117,27 +119,25 @@ export const SameItem = ({item}) => {
     )
 }
 export const SameNews = ({link}) => {
-    const [sameList, setSameList] = useState(null);
     const [cate, setCate] = useState(null);
     useEffect(() => {
         setCate(link.substring(5, link.lastIndexOf("/")))
     }, [cate])
 
-    const list = RssCate(cate).filter(item => item.link.indexOf(link.substring(5)) === -1);
-    useEffect(() => {
-        setSameList(list.slice(0, 4))
-    }, [sameList])
+    const list = RssCate(cate).filter(item => item.link.indexOf(link.substring(5)) === -1).slice(0, 4);
 
-    return (<section className="bg0">
-        <div className="p-t-4 p-b-40" style={{textAlign: "center", fontWeight:"bold"}}>
-            <h2 className="f1-l-1 cl2">Tin tức tương tự</h2>
-        </div>
-        <div className="col-md-10 col-lg-8">
-            <div style={{display: "inline-flex", marginLeft: "50px"}}>
-                {sameList ? sameList.map(item => <SameItem item={item}/>) : <p>Loading</p>}
+    return (
+        <section className="bg0">
+            <div className="p-t-4 p-b-40" style={{textAlign: "center", fontWeight: "bold"}}>
+                <h2 className="f1-l-1 cl2">Tin tức tương tự</h2>
             </div>
-        </div>
-    </section>)
+            <div className="col-md-10 col-lg-8">
+                <div style={{display: "inline-flex", marginLeft: "50px"}}>
+                    {list ? list.map(item => <SameItem item={item}/>) : <p>Loading</p>}
+                </div>
+            </div>
+        </section>
+    )
 }
 const saveRecentlyViewedNews = (news) => {
     if (news != null) {
