@@ -18,9 +18,8 @@ export const Breadcrumb = (props) => {
     const saved = localStorage.getItem('savedNews');
     const newsList = saved ? JSON.parse(saved) : [];
     useEffect(() => {
-        if (props.item) {
+        if (props.item)
             setIsSaved(newsList.findIndex(item => item.link === props.item.link) !== -1)
-        }
     }, [isSaved, props])
 
     const savedNews = (news) => {
@@ -48,8 +47,9 @@ export const Breadcrumb = (props) => {
                 <Link to={'/home'} className="breadcrumb-item f1-s-3 cl9">
                     Trang chủ
                 </Link>
-                <Link to={`/${props.cate}`} className="breadcrumb-item f1-s-3 cl9">
-                    {catedatas.find(item => item.cate === props.cate).name}
+                <Link to={`/${catedatas.findIndex(item => item.cate === props.cate) !== -1 ? props.cate : "#"}`}
+                      className="breadcrumb-item f1-s-3 cl9">
+                    {catedatas.findIndex(item => item.cate === props.cate) !== -1 ? catedatas.find(item => item.cate === props.cate).name : props.cate}
                 </Link>
                 <span className="breadcrumb-item f1-s-3 cl9">
 					 {props.title}

@@ -21,8 +21,9 @@ function ContentOfPost(props) {
         }
     }, [datacontent]);
     return (<div className="p-b-70">
-        <Link to={`/${props.cate}`} className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
-            {catedatas.find(item => item.cate === props.cate).name}
+        <Link to={`/${catedatas.findIndex(item => item.cate === props.cate) !== -1 ? props.cate : "#"}`}
+              className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
+            {catedatas.findIndex(item => item.cate === props.cate) !== -1 ? catedatas.find(item => item.cate === props.cate).name : props.cate}
         </Link>
         <h3 className="f1-l-3 cl2 p-b-20 p-t-33 respon2">
             {content.title}

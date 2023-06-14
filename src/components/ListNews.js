@@ -11,7 +11,7 @@ export const Breadcrumb = (params) => {
     return (
         <div className="container">
             <div className="bg0 flex-wr-sb-c p-rl-20 p-tb-8">
-                <div className="f2-s-1 p-r-30 m-tb-6 d-flex" >
+                <div className="f2-s-1 p-r-30 m-tb-6 d-flex">
                     <Link to={"/home"} className="breadcrumb-item f1-s-3 cl9">
                         Trang chủ
                     </Link>
@@ -153,7 +153,7 @@ export const PostLeft = (params) => {
 
     return (
         <div className="col-md-10 col-lg-8 p-b-80">
-            <div className={"d-flex"} style={{justifyContent:"space-between"}}>
+            <div className={"d-flex"} style={{justifyContent: "space-between"}}>
                 {typeSearch === 0 ? (<div className="pos-relative size-a-2 bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30">
                     <input key={0} className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
                            placeholder="Tìm tin tức..." onChange={e => search(e.target.value)}
@@ -161,21 +161,25 @@ export const PostLeft = (params) => {
                     <button className="flex-c-c size-a-1 ab-t-r fs-20 cl2 hov-cl10 trans-03">
                         <i className="zmdi zmdi-search"></i>
                     </button>
-                </div>) : (<div className={"pos-relative bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30"} style={{display: "inline-flex"}}>
+                </div>) : (<div className={"pos-relative bo-1-rad-22 of-hidden bocl11 m-tb-6 m-b-30"}
+                                style={{display: "inline-flex"}}>
                     <input key={1} className="f1-s-1 cl6 plh9 s-full p-l-25 p-r-20" type="text" name="search"
                            placeholder={`${!listening ? "Nhấn để nói..." : "Hãy nói gì đó..."}`} value={transcript}/>
                     {searchKey && (
-                        <button onClick={reset} className={"m-l--4"} style={{marginRight:"8px",fontSize:"18px", fontWeight:"400"}}>
+                        <button onClick={reset} className={"m-l--4"}
+                                style={{marginRight: "8px", fontSize: "18px", fontWeight: "400"}}>
                             x
                         </button>
                     )}
-                    <button onClick={!listening ? startListening : stopListening} style={{marginRight:"8px"}}>
+                    <button onClick={!listening ? startListening : stopListening} style={{marginRight: "8px"}}>
                         <i className={`fa ${!listening ? "fa-microphone" : "fa-search"}`}></i>
                     </button>
                 </div>)}
-                <div className={"pos-relative bo-1-rad-22 of-hidden m-tb-6 m-b-30"} style={{border:"none", padding:"6px"}} >
-                    <button onClick={changeSearch} style={{fontSize:"22px"}}>
-                        {typeSearch === 0 ? (<i className={"fa fa-microphone"}></i>):(<i className={"zmdi zmdi-search-for"}></i>)}
+                <div className={"pos-relative bo-1-rad-22 of-hidden m-tb-6 m-b-30"}
+                     style={{border: "none", padding: "6px"}}>
+                    <button onClick={changeSearch} style={{fontSize: "22px"}}>
+                        {typeSearch === 0 ? (<i className={"fa fa-microphone"}></i>) : (
+                            <i className={"zmdi zmdi-search-for"}></i>)}
                     </button>
                 </div>
                 <select className={"select size-a-2 bo-1-rad-5 of-hidden bocl11 m-tb-6 m-b-30"} onChange={changeOrder}>
@@ -189,8 +193,8 @@ export const PostLeft = (params) => {
                             handlePageClick={handlePageClick}></Pagination>
             )}
             {!currentList &&
-                <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Đang hiển thị danh
-                    sách theo danh mục tương ứng... </h4>}
+                <h4 style={{textAlign: "center", marginBottom: "50px", marginTop: "50px"}}> Không có tin nào trong danh
+                    mục này ! </h4>}
         </div>
     )
 }
