@@ -53,10 +53,17 @@ export const RssDetails = (titleUrl) => {
                 const title = $("h1.title-content").text();
                 const date = $("p.dateandcat.clearfix").text();
                 const sapo = $("h2.sapo-detail").text();
+                const video_link = $("div[type=VideoStream].VCSortableInPreviewMode").attr("data-vid");
                 const contents = $("div.content-news-detail").contents()
                 const range = document.createRange();
                 const entryBodyFragment = range.createContextualFragment(contents);
-                const result = {title: title, date: date, sapo: sapo, contents: entryBodyFragment}
+                const result = {
+                    title: title,
+                    date: date,
+                    sapo: sapo,
+                    contents: entryBodyFragment,
+                    video_link: video_link
+                }
                 setNewsDetail(result)
             }).catch(error => {
                 console.log(error);

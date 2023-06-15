@@ -15,11 +15,19 @@ function ContentOfPost(props) {
                 contentElement.removeChild(contentElement.firstChild);
             }
             contentRef.current.appendChild(datacontent)
+            const nodes = contentRef.current.querySelectorAll(`div.VCSortableInPreviewMode[type=VideoStream]`);
+            if (nodes.length > 0) {
+                const videoNode = document.createElement('video');
+                videoNode.src = "https://" + content.video_link;
+                videoNode.controls = true;
+                videoNode.style.width = "100%";
+                nodes[0].parentNode.replaceChild(videoNode, nodes[0]);
+            }
             const paragraphs = contentElement.querySelectorAll('p');
             let speakData = content.sapo + ", " + Array.from(paragraphs).map((p) => p.textContent).join(", ");
             setSpeak(speakData)
         }
-    }, [datacontent]);
+    }, [datacontent, content.video_link]);
     return (<div className="p-b-70">
         <Link to={`/${catedatas.findIndex(item => item.cate === props.cate) !== -1 ? props.cate : "#"}`}
               className="f1-s-10 cl2 hov-cl10 trans-03 text-uppercase">
@@ -37,7 +45,6 @@ function ContentOfPost(props) {
             <Speech text={speakContent}/>
         </div>
         <h5 className={"sapo p-b-15"}>{content.sapo}</h5>
-
         <div className={"main-content"} ref={contentRef}/>
 
 
@@ -48,7 +55,6 @@ function ContentOfPost(props) {
 
             <div className="flex-wr-s-s size-w-0">
                 <ShareFbButton/>
-
                 <ShareTwitterButton/>
             </div>
         </div>
@@ -58,7 +64,7 @@ function ContentOfPost(props) {
 function ShareFbButton() {
     const handleFbShare = () => {
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link"); // URL của tin tức muốn chia sẻ
-        // const urlToShare = "https://news-website-e7591.web.app" + sessionStorage.getItem("link");
+        // const urlToShare = "https://news-website-e7591.web.app" + sessionStorage.getItem("link_local");
         const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(urlToShare)}`;
         window.open(facebookShareUrl, '_blank');
     };
@@ -76,7 +82,7 @@ function ShareFbButton() {
 function ShareTwitterButton() {
     const ShareTwitterButton = () => {
         const urlToShare = "https://nld.com.vn" + sessionStorage.getItem("link"); // URL của tin tức muốn chia sẻ
-        // const urlToShare = "https://news-website-e7591.web.app" + sessionStorage.getItem("link");
+        // const urlToShare = "https://news-website-e7591.web.app" + sessionStorage.getItem("link_local");
         const twitterShareUrl = `https://twitter.com/share?url=${encodeURIComponent(urlToShare)}`;
         window.open(twitterShareUrl, '_blank');
     };

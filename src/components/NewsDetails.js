@@ -6,9 +6,11 @@ import ContentOfPost from "./ContentOfPost";
 import Error404 from "./Error404";
 import Sidebar from "./layout/Sidebar";
 import {Comments, FacebookProvider} from "react-facebook";
+import {Helmet} from "react-helmet";
 
 export function loadDetails({params}) {
     const link = `/api/` + params.cate + "/" + params.title + ".htm";
+    sessionStorage.setItem("link_local", `/` + params.cate + "/" + params.title);
     sessionStorage.setItem("link", `/` + params.cate + "/" + params.title + ".htm");
     return {link: link, cate: params.cate, title: params.title};
 }
@@ -67,7 +69,8 @@ export const Comment = (props) => {
         <FacebookProvider appId="649226417231505">
             <Comments
                 href={`http://127.0.0.1:3000/` + props.link.substring(5, props.link.indexOf('.htm'))}/>
-            {/*<Comments href={"https://news-website-e7591.web.app/" + props.link.substring(5, props.link.indexOf('.htm'))}/>*/}
+            {/*<Comments*/}
+            {/*    href={"https://news-website-e7591.web.app/" + props.link.substring(5, props.link.indexOf('.htm'))}/>*/}
         </FacebookProvider>
     );
 }
@@ -153,6 +156,22 @@ const saveRecentlyViewedNews = (news) => {
         sessionStorage.setItem('recentlyViewedNews', JSON.stringify(newsList));
     }
 };
+const metaAdder = (queryProperty, value) => {
+    // Get an element if it exists already
+    let element = document.querySelector(`meta[${queryProperty}]`);
+
+    // Check if the element exists
+    if (element) {
+        // If it does just change the content of the element
+        element.setAttribute("content", value);
+    } else {
+        // It doesn't exist so lets make a HTML element string with the info we want
+        element = `<meta ${queryProperty} content="${value}" />`;
+
+        // And insert it into the head
+        document.head.insertAdjacentHTML("beforeend", element);
+    }
+};
 
 export function NewsDetails() {
     const data = useLoaderData();
@@ -168,7 +187,24 @@ export function NewsDetails() {
     }, [viewed, item])
 
     const post = RssDetails(memoizedUrl);
+    useEffect(() => {
+        if (post) {
+            metaAdder('property="og:title"', post.title)
+            metaAdder('property="og:url"', window.location.href)
+            metaAdder('property="og:description"', post.description)
+            metaAdder('property="og:image"', post.imageUrl)
+            metaAdder('name="twitter:title"', post.title)
+            metaAdder('name="twitter:description"', post.description)
+            metaAdder('name="twitter:image"', post.imageUrl)
+        }
+    }, [post])
+
     return (<div key={data.link}>
+        {post ? <div className="application">
+            <Helmet>
+                <title>{post.title}</title>
+            </Helmet>
+        </div> : ""}
         {post ? (<div><Breadcrumb item={item} key={data} cate={data.cate} title={post.title}/>
             <Content link={data.link} key={post} post={post} cate={data.cate}/></div>) : (
             <Error404/>)}
